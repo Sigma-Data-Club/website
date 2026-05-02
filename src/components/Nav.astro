@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../lib/url';
+
 interface Props {
   currentPath: string;
 }
@@ -24,7 +26,7 @@ function isActive(match: string, path: string): boolean {
 <nav class="nav">
   {
     links.map((l) => (
-      <a href={l.href} class={isActive(l.match, currentPath) ? 'active' : undefined}>
+      <a href={withBase(l.href)} class={isActive(l.match, currentPath) ? 'active' : undefined}>
         {l.label}
       </a>
     ))

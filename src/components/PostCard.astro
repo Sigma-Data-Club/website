@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { getEntries } from 'astro:content';
+import { withBase } from '../lib/url';
 
 interface Props {
   post: CollectionEntry<'blog'>;
@@ -20,6 +21,6 @@ const fmtDate = post.data.date.toLocaleDateString('es-ES', {
     {authors.length > 0 && <span>· por {authors.map((a) => a.data.name).join(', ')}</span>}
     {post.data.tags.length > 0 && <span>· {post.data.tags.map((t) => `#${t}`).join(' ')}</span>}
   </div>
-  <h3><a href={`/blog/${post.slug}`}>{post.data.title}</a></h3>
+  <h3><a href={withBase(`/blog/${post.slug}`)}>{post.data.title}</a></h3>
   <p>{post.data.excerpt}</p>
 </article>
