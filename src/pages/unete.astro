@@ -1,0 +1,266 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Únete · Sigma Data Club"
+  eyebrow="/ unete · / contacto"
+  heading='<span class="accent">$</span> ./join.sh'
+  lead="Sin examen de entrada. Sin cuota. Solo necesitas estar matriculado en algún grado o máster de la UPV. El formulario tarda menos de un minuto."
+>
+  <section>
+    <div class="container">
+      <div class="grid grid-2" style="gap: 3rem; align-items: start;">
+        <div>
+          <span class="eyebrow">Formulario de alta</span>
+          <h2 style="margin-bottom: 1.5rem;">Hazte socio.</h2>
+
+          <form
+            class="form"
+            onsubmit="event.preventDefault(); this.querySelector('.form-result').hidden=false; this.querySelector('button[type=submit]').textContent='✓ enviado'; this.querySelector('button[type=submit]').disabled=true;"
+          >
+            <div class="form-row">
+              <div>
+                <label for="nombre">nombre</label>
+                <input id="nombre" name="nombre" type="text" placeholder="Clara" required />
+              </div>
+              <div>
+                <label for="apellidos">apellidos</label>
+                <input
+                  id="apellidos"
+                  name="apellidos"
+                  type="text"
+                  placeholder="Reig Navarro"
+                  required
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="email">email upv</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="creignav@upv.es"
+                required
+                pattern=".+@.*upv\.es"
+              />
+            </div>
+
+            <div class="form-row">
+              <div>
+                <label for="grado">grado / programa</label>
+                <select id="grado" name="grado" required>
+                  <option value="">— elegir —</option>
+                  <option>GIIC · Ingeniería Informática</option>
+                  <option>GIA · Inteligencia Artificial</option>
+                  <option>GCDD · Ciencia de Datos</option>
+                  <option>ETSII · Ingeniería Industrial</option>
+                  <option>ADE / ADE+GIIC</option>
+                  <option>Matemáticas</option>
+                  <option>Biotecnología</option>
+                  <option>Máster en Ciencia de Datos</option>
+                  <option>Máster en Inteligencia Artificial</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+              <div>
+                <label for="curso">curso</label>
+                <select id="curso" name="curso" required>
+                  <option value="">— elegir —</option>
+                  <option>1.º</option><option>2.º</option><option>3.º</option><option>4.º</option
+                  ><option>5.º</option>
+                  <option>Máster</option><option>Doctorado</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label>nivel actual con datos</label>
+              <select name="nivel" required>
+                <option value="">— elegir —</option>
+                <option>Cero · nunca he tocado Python</option>
+                <option>Iniciado · sé qué es un DataFrame</option>
+                <option>Intermedio · he hecho proyectos pequeños</option>
+                <option>Avanzado · trabajo con esto</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="tracks">qué tracks te interesan (puedes marcar varios)</label>
+              <div style="display: grid; gap: 0.5rem; padding: 0.5rem 0; font-size: 0.9rem;">
+                <label
+                  style="display:flex; gap:0.5rem; text-transform:none; letter-spacing:0; color:var(--fg);"
+                  ><input type="checkbox" /> NLP &amp; LLMs</label
+                >
+                <label
+                  style="display:flex; gap:0.5rem; text-transform:none; letter-spacing:0; color:var(--fg);"
+                  ><input type="checkbox" /> Visión por computador</label
+                >
+                <label
+                  style="display:flex; gap:0.5rem; text-transform:none; letter-spacing:0; color:var(--fg);"
+                  ><input type="checkbox" /> MLOps &amp; producción</label
+                >
+                <label
+                  style="display:flex; gap:0.5rem; text-transform:none; letter-spacing:0; color:var(--fg);"
+                  ><input type="checkbox" /> Open data</label
+                >
+                <label
+                  style="display:flex; gap:0.5rem; text-transform:none; letter-spacing:0; color:var(--fg);"
+                  ><input type="checkbox" /> Estadística aplicada / causal</label
+                >
+                <label
+                  style="display:flex; gap:0.5rem; text-transform:none; letter-spacing:0; color:var(--fg);"
+                  ><input type="checkbox" /> Bio data</label
+                >
+              </div>
+            </div>
+
+            <div>
+              <label for="mensaje">cuéntanos algo (opcional)</label>
+              <textarea
+                id="mensaje"
+                name="mensaje"
+                placeholder="por qué quieres unirte, en qué proyecto soñarías colaborar, lo que sea"
+              ></textarea>
+            </div>
+
+            <div>
+              <button type="submit" class="btn btn-primary" style="justify-self: start;"
+                >enviar formulario</button
+              >
+              <p class="form-result muted" hidden style="margin-top: 1rem; font-size: 0.85rem;">
+                ✓ Hecho. Te llegará un correo de bienvenida en menos de 24h. Mientras, pásate el
+                próximo jueves a las 19:00 — aula 1G 2.4.
+              </p>
+            </div>
+
+            <p class="dim" style="font-size: 0.78rem;">
+              tus datos solo se usan para gestionar el alta como socio. nunca los compartimos.
+              puedes pedir baja por correo en cualquier momento.
+            </p>
+          </form>
+        </div>
+
+        <aside>
+          <span class="eyebrow">Otras formas de empezar</span>
+          <h2 style="margin-bottom: 1.5rem;">Si lo prefieres, sin formulario.</h2>
+
+          <div class="grid" style="gap: 1rem;">
+            <article class="card">
+              <div class="card-meta"><span class="tag">// 01</span></div>
+              <h3>Aparece un jueves</h3>
+              <p>
+                19:00 en el aula 1G 2.4 del edificio ETSINF. No hace falta avisar. Pregunta por
+                cualquiera que lleve la pegatina sigma.
+              </p>
+            </article>
+            <article class="card">
+              <div class="card-meta"><span class="tag">// 02</span></div>
+              <h3>Únete al Discord</h3>
+              <p>
+                Casi 400 personas entre alumnos, alumni y mentores. Canal #welcome para presentarse,
+                #help para dudas técnicas.
+              </p>
+              <p style="margin-top: 0.6rem;"><a href="#">discord.gg/sigma-data</a></p>
+            </article>
+            <article class="card">
+              <div class="card-meta"><span class="tag">// 03</span></div>
+              <h3>Newsletter quincenal</h3>
+              <p>
+                Calendario de eventos, nuevos posts, ofertas de prácticas filtradas por la
+                comunidad. Cero spam.
+              </p>
+              <p style="margin-top: 0.6rem;"><a href="#">apuntarme a la newsletter</a></p>
+            </article>
+          </div>
+
+          <div class="terminal" style="margin-top: 2rem;">
+            <div class="terminal-bar">
+              <span class="terminal-dot"></span><span class="terminal-dot"></span><span
+                class="terminal-dot"></span>
+              <span class="terminal-title">contacto</span>
+            </div>
+            <div class="terminal-body">
+              <span class="prompt">$</span> cat contact.txt
+              <span class="key">email</span>
+              <span class="val">hola@sigma-data.upv.es</span>
+              <span class="key">github</span>
+              <span class="val">github.com/sigma-data-club</span>
+              <span class="key">discord</span>
+              <span class="val">discord.gg/sigma-data</span>
+              <span class="key">instagram</span>
+              <span class="val">@sigma.dataclub</span>
+              <span class="key">linkedin</span>
+              <span class="val">/company/sigma-data-club-upv</span>
+
+              <span class="prompt">$</span> cat where.txt
+              <span class="cmt"># Universidad Politécnica de Valencia</span>
+              <span class="cmt"># Edificio 1G — ETSINF</span>
+              <span class="cmt"># Aula 1G 2.4</span>
+              <span class="cmt"># jueves · 19:00 — 21:00</span><span class="cursor"></span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">FAQ</span>
+          <h2>Lo que más nos preguntan.</h2>
+        </div>
+        <span class="section-num">[ 5 preguntas ]</span>
+      </div>
+
+      <div class="grid grid-2">
+        <article class="card">
+          <h3>¿Hace falta saber programar?</h3>
+          <p class="muted">
+            No. Tenemos un track introductorio cada cuatrimestre pensado específicamente para quien
+            viene de cero. Si llevas un par de prácticas con Python, ya vas sobrado.
+          </p>
+        </article>
+        <article class="card">
+          <h3>¿Cuánto cuesta?</h3>
+          <p class="muted">
+            Cero euros. La universidad cubre el espacio y dos sponsors pequeños cubren el café y los
+            dominios. Nunca cobramos por entrar a un evento.
+          </p>
+        </article>
+        <article class="card">
+          <h3>¿Soy de otra universidad, puedo venir?</h3>
+          <p class="muted">
+            A los eventos abiertos sí — escríbenos antes para que te dejemos en lista de acceso al
+            campus. Para hacerte socio sí necesitas estar matriculado en la UPV.
+          </p>
+        </article>
+        <article class="card">
+          <h3>¿Qué se hace exactamente cada jueves?</h3>
+          <p class="muted">
+            Workshop, charla, datathon o open hack — depende de la semana. El calendario completo
+            está en <a href="/eventos">/eventos</a>.
+          </p>
+        </article>
+        <article class="card">
+          <h3>¿Puedo proponer un proyecto o un workshop?</h3>
+          <p class="muted">
+            Sí. Abre un issue en el monorepo o ven a una sesión y proponlo en los 5 minutos abiertos
+            del final. Si dos personas se apuntan, sale.
+          </p>
+        </article>
+        <article class="card">
+          <h3>¿Reconocen ECTS?</h3>
+          <p class="muted">
+            A través del programa de Reconocimiento Académico de Créditos de la UPV, sí. Hasta 3
+            ECTS por curso por participación documentada.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+</PageLayout>
