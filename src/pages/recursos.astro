@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+import ResourceGroup from '../components/ResourceGroup.astro';
+
+const groupOrder = [
+  'fundamentos',
+  'machine learning',
+  'nlp y llms',
+  'datos & sql',
+  'mlops & producción',
+  'datasets',
+  'apuntes',
+] as const;
+
+const groupHeadings: Record<(typeof groupOrder)[number], string> = {
+  fundamentos: 'fundamentos',
+  'machine learning': 'machine learning',
+  'nlp y llms': 'nlp y llms',
+  'datos & sql': 'datos & sql',
+  'mlops & producción': 'mlops & producción',
+  datasets: 'datasets abiertos (recomendados)',
+  apuntes: 'nuestros propios apuntes',
+};
+
+const all = await getCollection('recursos');
+const grouped = groupOrder.map((g) => ({
+  group: g,
+  heading: groupHeadings[g],
+  items: all.filter((r) => r.data.group === g).sort((a, b) => a.data.order - b.data.order),
+}));
+---
+
+<PageLayout
+  title="Recursos · Sigma Data Club"
+  eyebrow="/ recursos"
+  heading="Material curado por la comunidad."
+  lead="Lo que el club recomienda — no lo que sale en SEO. Lista mantenida por los track leads, revisada cada semestre. Si crees que falta algo, manda un PR."
+>
+  <section>
+    <div class="container">
+      {
+        grouped.map(
+          ({ heading, items }) =>
+            items.length > 0 && <ResourceGroup heading={heading} items={items} />,
+        )
+      }
+    </div>
+  </section>
+</PageLayout>

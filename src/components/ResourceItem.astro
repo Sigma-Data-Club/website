@@ -1,0 +1,17 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+  item: CollectionEntry<'recursos'>;
+}
+const { item } = Astro.props;
+const { title, by, kind, url } = item.data;
+---
+
+<a class="res-item" href={url} target="_blank" rel="noopener">
+  <span class="kind">{kind}</span>
+  <div>
+    <span class="title">{title}</span>
+    {by && <span class="by">— {by}</span>}
+  </div>
+  <span class="arrow">→</span>
+</a>

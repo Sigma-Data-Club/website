@@ -1,0 +1,17 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ResourceItem from './ResourceItem.astro';
+
+interface Props {
+  heading: string;
+  items: CollectionEntry<'recursos'>[];
+}
+const { heading, items } = Astro.props;
+---
+
+<div class="res-group">
+  <h3>{heading}</h3>
+  <div class="res-list">
+    {items.map((it) => <ResourceItem item={it} />)}
+  </div>
+</div>
