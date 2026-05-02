@@ -1,6 +1,6 @@
 ---
 name: 'Nombre Apellidos'
-kind: 'junta' # 'junta' | 'mentor'
+kind: 'junta' # 'junta' | 'track-lead' | 'mentor'
 role: 'presidenta'
 initials: 'NA'
 bio: 'Frase corta describiendo a la persona.'
