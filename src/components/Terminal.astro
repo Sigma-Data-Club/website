@@ -1,0 +1,25 @@
+---
+interface Props {
+  title?: string;
+  bodyHtml?: string;
+}
+const { title = '~/sigma-data-club — bash', bodyHtml } = Astro.props;
+---
+
+<div class="terminal" aria-label="Terminal de bienvenida">
+  <div class="terminal-bar">
+    <span class="terminal-dot"></span>
+    <span class="terminal-dot"></span>
+    <span class="terminal-dot"></span>
+    <span class="terminal-title">{title}</span>
+  </div>
+  {
+    bodyHtml ? (
+      <div class="terminal-body" set:html={bodyHtml} />
+    ) : (
+      <div class="terminal-body">
+        <slot />
+      </div>
+    )
+  }
+</div>

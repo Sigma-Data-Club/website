@@ -1,11 +1,162 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Stat from '../components/Stat.astro';
+import Terminal from '../components/Terminal.astro';
+import EventCard from '../components/EventCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+// Terminal body ports legacy index.html lines 64-75 verbatim.
+// `.terminal-body` uses `white-space: pre`, so set:html bypasses JSX whitespace collapsing.
+const terminalBodyHtml = `<span class="prompt">sigma@upv:~$</span> whoami
+<span class="out">→ club universitario de ciencia de datos</span>
+<span class="prompt">sigma@upv:~$</span> cat manifesto.txt
+<span class="cmt"># aprender haciendo, no leyendo slides</span>
+<span class="cmt"># compartir el código, no la pantalla</span>
+<span class="cmt"># proyectos reales con datos reales</span>
+<span class="prompt">sigma@upv:~$</span> ./join.sh
+<span class="out">→ formulario en /unete</span><span class="cursor"></span>`;
+
+const now = new Date();
+const upcoming = (await getCollection('eventos'))
+  .filter((e) => e.data.date >= now)
+  .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+const nextEvent = upcoming[0];
+
+const allProjects = await getCollection('proyectos');
+const recentProjects = allProjects
+  .filter((p) => p.data.status !== 'archivado')
+  .sort((a, b) => a.data.title.localeCompare(b.data.title))
+  .slice(0, 4);
 ---
 
-<BaseLayout title="Sigma Data Club — UPV">
+<BaseLayout
+  title="Sigma Data Club — UPV"
+  description="Club de ciencia de datos de la Universidad Politécnica de Valencia. Talleres, proyectos y comunidad."
+>
   <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">v3.2.1 · curso 2025/26 · UPV</span>
+        <h1
+          set:html="Construimos <span class='accent'>data science</span> en la universidad,<br>línea a línea."
+        />
+        <p class="lead">
+          Sigma Data Club es la comunidad de estudiantes de la Politécnica de Valencia que entrena
+          modelos, publica análisis y rompe datasets cada jueves a las&nbsp;19:00 en el aula
+          1G&nbsp;2.4.
+        </p>
+        <div class="hero-cta">
+          <a href="/unete" class="btn btn-primary">únete al club</a>
+          <a href="/eventos" class="btn btn-ghost">próximos eventos</a>
+        </div>
+        <div class="hero-meta">
+          <div class="row">
+            <span class="key">status</span><span class="val accent"
+              >● activo · aceptando miembros</span
+            >
+          </div>
+          <div class="row">
+            <span class="key">cuota</span><span class="val">0 € · gratis para alumnos UPV</span>
+          </div>
+          <div class="row">
+            <span class="key">stack</span><span class="val"
+              >Python · PyTorch · DuckDB · Polars · Quarto</span
+            >
+          </div>
+        </div>
+      </div>
+      <aside>
+        <Terminal bodyHtml={terminalBodyHtml} />
+      </aside>
+    </div>
+  </section>
+
+  <section>
     <div class="container">
-      <h1>scaffold ok</h1>
+      <SectionHead
+        eyebrow="Manifesto"
+        title="Aprender haciendo, no leyendo slides."
+        num="01 / 04"
+      />
+      <div class="grid grid-3">
+        <article class="card bracketed">
+          <div class="card-meta"><span class="tag">// 01</span><span>código</span></div>
+          <h3>git push antes de hablar</h3>
+          <p>
+            Cada sesión termina con un repo público. No hay diapositiva que sustituya un Jupyter
+            notebook abierto en GitHub.
+          </p>
+        </article>
+        <article class="card bracketed">
+          <div class="card-meta"><span class="tag">// 02</span><span>datos</span></div>
+          <h3>datasets reales, no toy</h3>
+          <p>
+            Trabajamos con datos abiertos del Ayuntamiento, RENFE, AEMET y la propia UPV. Lo que
+            aprendes aquí se parece a lo que hace un científico de datos un martes.
+          </p>
+        </article>
+        <article class="card bracketed">
+          <div class="card-meta"><span class="tag">// 03</span><span>comunidad</span></div>
+          <h3>senior ↔ junior, sin barrera</h3>
+          <p>
+            Si llevas tres años con PyTorch o estás compilando tu primer pandas, hay sitio. La regla
+            es ayudar a la persona de la fila de detrás.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <SectionHead eyebrow="Datos del club" title="Por qué medimos todo." num="02 / 04" />
+      <div class="stats">
+        <Stat label="Miembros activos" value="187" foot="+42 vs. curso anterior" />
+        <Stat label="Eventos / semestre" value="24" foot="talleres · charlas · datathons" />
+        <Stat label="Proyectos publicados" value="31" foot="en GitHub · MIT · open" />
+        <Stat label="Grados representados" value="9" foot="ETSINF · ETSII · ADE · BIO …" />
+      </div>
+    </div>
+  </section>
+
+  {
+    nextEvent && (
+      <section>
+        <div class="container">
+          <SectionHead eyebrow="Próximo evento" title="Nos vemos el jueves." num="03 / 04" />
+          <EventCard event={nextEvent} />
+        </div>
+      </section>
+    )
+  }
+
+  <section>
+    <div class="container">
+      <SectionHead eyebrow="Última hornada" title="Lo que estamos construyendo." num="04 / 04" />
+      <div class="grid grid-2">
+        {recentProjects.map((p) => <ProjectCard project={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="ascii-rule"></div>
+      <div class="row" style="justify-content: space-between; gap: 2rem;">
+        <div>
+          <h2 style="margin-bottom: 0.75rem;">
+            ¿Estudias en la UPV?<br /><span class="accent">Te queremos en el club.</span>
+          </h2>
+          <p class="muted">
+            Sin examen de entrada. Sin prerequisitos. Solo curiosidad y un portátil.
+          </p>
+        </div>
+        <div>
+          <a href="/unete" class="btn btn-primary">./join.sh</a>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>
