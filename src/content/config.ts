@@ -15,7 +15,7 @@ const blog = defineCollection({
 });
 
 const eventos = defineCollection({
-  type: 'data',
+  type: 'content',
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
@@ -32,7 +32,7 @@ const eventos = defineCollection({
 });
 
 const proyectos = defineCollection({
-  type: 'data',
+  type: 'content',
   schema: z.object({
     title: z.string(),
     thumb: z.string(),
@@ -48,7 +48,7 @@ const proyectos = defineCollection({
 });
 
 const equipo = defineCollection({
-  type: 'data',
+  type: 'content',
   schema: z.object({
     name: z.string(),
     kind: z.enum(['junta', 'mentor']),
@@ -64,7 +64,7 @@ const equipo = defineCollection({
 });
 
 const tracks = defineCollection({
-  type: 'data',
+  type: 'content',
   schema: z.object({
     name: z.string(),
     lead: z.string(),
@@ -76,7 +76,7 @@ const tracks = defineCollection({
 });
 
 const recursos = defineCollection({
-  type: 'data',
+  type: 'content',
   schema: z.object({
     title: z.string(),
     by: z.string().optional(),

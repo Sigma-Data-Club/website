@@ -603,7 +603,7 @@ const blog = defineCollection({
 });
 
 const eventos = defineCollection({
-  type: 'data',
+  type: 'content',
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
@@ -620,7 +620,7 @@ const eventos = defineCollection({
 });
 
 const proyectos = defineCollection({
-  type: 'data',
+  type: 'content',
   schema: z.object({
     title: z.string(),
     thumb: z.string(),
@@ -636,7 +636,7 @@ const proyectos = defineCollection({
 });
 
 const equipo = defineCollection({
-  type: 'data',
+  type: 'content',
   schema: z.object({
     name: z.string(),
     kind: z.enum(['junta', 'mentor']),
@@ -652,7 +652,7 @@ const equipo = defineCollection({
 });
 
 const tracks = defineCollection({
-  type: 'data',
+  type: 'content',
   schema: z.object({
     name: z.string(),
     lead: z.string(),
@@ -664,7 +664,7 @@ const tracks = defineCollection({
 });
 
 const recursos = defineCollection({
-  type: 'data',
+  type: 'content',
   schema: z.object({
     title: z.string(),
     by: z.string().optional(),
@@ -686,7 +686,7 @@ const recursos = defineCollection({
 export const collections = { blog, eventos, proyectos, equipo, tracks, recursos };
 ```
 
-(Collections that contain only frontmatter use `type: 'data'` so JSON/YAML/TOML files are also accepted; we use `.md` with empty body throughout for consistency.)
+(Astro 4's `type: 'data'` only accepts JSON/YAML/TOML — not `.md`. Since we author every collection in `.md` for editorial consistency, all six collections use `type: 'content'`. The non-blog collections never call `.render()`, so the empty body costs nothing.)
 
 - [ ] **Step 4.2: Write `src/content/blog/_template.mdx`**
 
