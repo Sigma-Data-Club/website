@@ -6,12 +6,16 @@ interface Props {
 const { project } = Astro.props;
 const { title, thumb, status, category, summary, contribCount, tags, repoUrl } = project.data;
 const categoryLower = category.toLowerCase();
+const contribLabel =
+  contribCount === undefined ? null : `${contribCount} contrib${contribCount === 1 ? '' : 's'}`;
 ---
 
 <article class="project">
   <div class="thumb">{thumb}</div>
   <div>
-    <div class="meta">{status} · {categoryLower} · {contribCount} contribs</div>
+    <div class="meta">
+      {status} · {categoryLower}{contribLabel && ` · ${contribLabel}`}
+    </div>
     <h3>{title}</h3>
     <p>{summary}</p>
     {

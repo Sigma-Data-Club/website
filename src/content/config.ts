@@ -40,7 +40,7 @@ const proyectos = defineCollection({
     category: z.enum(['NLP', 'Visión', 'ML', 'Open Data', 'MLOps', 'Otro']),
     tags: z.array(z.string()).default([]),
     summary: z.string(),
-    contribCount: z.number(),
+    contribCount: z.number().optional(),
     repoUrl: z.string().url().optional(),
     demoUrl: z.string().url().optional(),
     contributors: z.array(reference('equipo')).optional(),
