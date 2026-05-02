@@ -4,50 +4,76 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Static marketing site for **Sigma Data Club**, the data science student club at Universidad Politécnica de Valencia (UPV). Hosted on GitHub Pages. All user-facing copy is in Spanish (`<html lang="es">`).
+Static marketing site for **Sigma Data Club**, the data science student club at Universidad Politécnica de Valencia (UPV). Built with **Astro** (static output), deployed to GitHub Pages. All user-facing copy is in Spanish (`<html lang="es">`).
 
-## Stack & Build
+## Commands
 
-- Pure static: HTML + one CSS file + one JS file. No bundler, no package manager, no dependencies.
-- No build, lint, or test commands exist. Do not invent them.
-- Local preview: `python3 -m http.server 8000` from the repo root, then open `http://localhost:8000/`.
-- Deploy: GitHub Pages serves the repo root directly. A push to `main` is the deploy.
+```bash
+npm run dev        # http://localhost:4321
+npm run build      # → dist/
+npm run preview    # serve dist/ locally
+npm run check      # astro check (TS + content schema validation)
+npm run lint       # prettier --check .
+npm run format     # prettier --write .
+```
+
+Node 20 (`.nvmrc`).
 
 ## Architecture
 
-Eight standalone HTML pages, each fully self-contained:
+Static Astro site (Astro 4, pinned). No client framework — only `.astro` components plus one inline pre-paint theme script. Visual design is driven by a single global stylesheet (`src/styles/global.css`) imported once in `BaseLayout`. The CSS file is the same terminal/hacker aesthetic that pre-dates the Astro migration; do not refactor it without explicit reason.
 
-```
-index.html  sobre.html  equipo.html  eventos.html
-proyectos.html  blog.html  recursos.html  unete.html
-```
+### Layouts
 
-Every page hard-codes the same `<header class="site-header">` (with the full nav) and `<footer class="site-footer">`. There is no templating layer — **adding or renaming a page requires editing the nav block in all eight HTML files**.
+- `src/layouts/BaseLayout.astro` — owns `<html>`, `<head>`, the inline theme script, header, footer, and a content slot. Always wrap pages in this (directly or via PageLayout / PostLayout).
+- `src/layouts/PageLayout.astro` — wraps Base, renders the `.page-head` section (eyebrow + h1 + lead), then a slot. Use for content pages.
+- `src/layouts/PostLayout.astro` — wraps Base for blog posts; renders title/date/authors and a `<article class="prose">` slot for MDX content.
 
-Each page links the same two assets:
+### Theme toggle
 
-- `styles.css` — single stylesheet, terminal/hacker aesthetic, OKLCH color tokens.
-- `app.js` — runs as a single IIFE; handles theme toggle and active-nav highlighting.
+Initialization is an inline `<script is:inline>` in `BaseLayout`'s `<head>` so it runs before first paint (avoids FOUC). LocalStorage key: `sdc-theme`. Falls back to `prefers-color-scheme`, then to `dark`. The button label shows the **target** theme, not the current one (`[ light ]` while in dark mode) — keep this convention.
 
-### `app.js` behavior worth knowing
+### Content collections
 
-- Theme is persisted in `localStorage` under key `sdc-theme`. Falls back to `prefers-color-scheme`, then to `dark`.
-- `initTheme()` runs **before** `DOMContentLoaded` to prevent a flash of the wrong theme. Keep `<script src="app.js">` in `<head>` (not deferred) so this guarantee holds.
-- The toggle button label shows the **target** theme, not the current one (`[ light ]` while in dark mode). Don't "fix" this.
-- `markActiveNav()` matches the current `location.pathname`'s filename (lowercased) against each `.nav a[href]`. New nav entries must use plain filenames like `eventos.html` — not `/eventos.html` or `./eventos.html` — or the active state breaks.
+Six collections, all defined in `src/content/config.ts` with Zod schemas. `_template.{md,mdx}` files in each folder are ignored (Astro skips files starting with `_`).
 
-### `styles.css` conventions
+| Collection  | Format | Body used? | Purpose                                              |
+| ----------- | ------ | ---------- | ---------------------------------------------------- |
+| `blog`      | MDX    | yes        | Blog posts                                           |
+| `eventos`   | md     | no         | Events (calendario + archivo)                        |
+| `proyectos` | md     | no         | Projects (destacados + archivo)                      |
+| `equipo`    | md     | no         | People — `kind: 'junta' \| 'track-lead' \| 'mentor'` |
+| `tracks`    | md     | no         | Track leads (table-shaped)                           |
+| `recursos`  | md     | no         | Curated learning resources                           |
 
-- Theming via CSS custom properties on `:root` (dark, default) and `[data-theme="light"]`. Add new colors as `--vars`, not hardcoded values.
-- Background grid + CRT scanlines are drawn with `body::before` / `body::after`. The `mix-blend-mode: multiply` scanline overlay is intentional; don't replace with opacity.
-- Reusable utility/component classes already exist — reuse before inventing:
-  - Layout: `.container`, `.grid.grid-2|grid-3|grid-4`, `.section-head`
-  - Typography: `.eyebrow` (auto-prepends `// `), `.section-num` (e.g. `[ 01 / 04 ]`), `.ascii-rule`, `.muted`, `.accent`
-  - Components: `.card` (+ `.card.bracketed`, `.card.clickable`), `.btn.btn-primary|btn-ghost`, `.terminal` + `.terminal-body` (with `.prompt`, `.out`, `.key`, `.val`, `.cmt` spans), `.stats` / `.stat`
-- Section numbering convention: each top-level `<section>` on a page gets a `.section-num` like `[ 02 / 04 ]`. Updating the count means updating every section on that page.
+Cross-references: `blog.authors` and `proyectos.contributors` use `reference('equipo')` for typed slug refs. (Note: Astro 4 only supports `.md` files inside collections marked `type: 'content'`; the schemas reflect that.)
 
-## Editorial conventions
+### Active nav
 
-- Spanish copy throughout. Match the existing voice (terse, lowercase eyebrows, terminal/CLI metaphors like `./join.sh`, `git push antes de hablar`).
-- Page heads use `<title>… · Sigma Data Club</title>` and an eyebrow shaped `/ <pagename>`.
-- Brand mark is the literal character `σ` inside `<span class="brand-mark">`.
+Header computes the active nav link from `Astro.url.pathname` at build time — no runtime JS for this.
+
+### Whitespace-sensitive blocks (terminal)
+
+`.terminal-body` uses `white-space: pre`. Avoid putting raw markup inside JSX inside the terminal — JSX template indentation will leak as leading spaces on each line. Pattern used elsewhere: declare a string constant with the verbatim markup and inject via `set:html` on the `<div class="terminal-body">`. See `src/pages/index.astro` and `src/pages/unete.astro` for examples.
+
+### Date and time formatting
+
+Event dates render via `toLocaleDateString` / `toLocaleTimeString`. Always pass `timeZone: 'Europe/Madrid'` to the locale call — without it, the build environment's TZ (UTC on GitHub Actions) is used and shifts all displayed times by 1-2 hours. See `src/components/EventCard.astro` and `src/components/EventTable.astro`.
+
+## Adding content
+
+Copy the relevant `_template.{md,mdx}` and fill the frontmatter. Slug is the filename. To hide a draft blog post, set `draft: true`. Validation happens on `npm run check` and on every CI run.
+
+## Deployment
+
+Push to `main` triggers `.github/workflows/deploy.yml`, which uses `withastro/action@v3` to build and deploy to GitHub Pages. Settings → Pages → Source must be set to "GitHub Actions" (one-time manual configuration). Site URL is `https://sigma-data-club.github.io` (configured in `astro.config.mjs`).
+
+## Conventions
+
+- Editorial voice: Spanish, lowercase eyebrows, terminal/CLI metaphors (`./join.sh`, `git push antes de hablar`).
+- Section numbering: each top-level `<section>` on a content page gets a `.section-num` like `[ 02 / 04 ]`. Updating the count means updating every section on that page.
+- The brand mark is the literal character `σ` inside `<span class="brand-mark">`.
+
+## Spec history
+
+The migration from hand-written HTML to Astro is documented in `docs/superpowers/specs/2026-05-02-astro-scaffold-design.md` and implemented per `docs/superpowers/plans/2026-05-02-astro-scaffold.md`.
