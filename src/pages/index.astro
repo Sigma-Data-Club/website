@@ -15,8 +15,14 @@ const terminalBodyHtml = `<span class="prompt">sigma@upv:~$</span> whoami
 <span class="cmt"># aprender haciendo, no leyendo slides</span>
 <span class="cmt"># compartir el código, no la pantalla</span>
 <span class="cmt"># proyectos reales con datos reales</span>
+<span class="prompt">sigma@upv:~$</span> ls /eventos/proximos
+<span class="key">2025-10-23</span>  <span class="val">workshop_pytorch_intro.md</span>
+<span class="key">2025-11-06</span>  <span class="val">datathon_renfe_open_data.md</span>
+<span class="key">2025-11-20</span>  <span class="val">charla_meta_ai_research.md</span>
 <span class="prompt">sigma@upv:~$</span> ./join.sh
 <span class="out">→ formulario en /unete</span><span class="cursor"></span>`;
+const heroHeadingHtml =
+  "Construimos <span class='accent'>data&nbsp;science</span> en la universidad,<br>línea&nbsp;a&nbsp;línea.";
 
 const now = new Date();
 const upcoming = (await getCollection('eventos'))
@@ -39,9 +45,7 @@ const recentProjects = allProjects
     <div class="container hero-grid">
       <div>
         <span class="eyebrow">v3.2.1 · curso 2025/26 · UPV</span>
-        <h1
-          set:html="Construimos <span class='accent'>data science</span> en la universidad,<br>línea a línea."
-        />
+        <h1 set:html={heroHeadingHtml} />
         <p class="lead">
           Sigma Data Club es la comunidad de estudiantes de la Politécnica de Valencia que entrena
           modelos, publica análisis y rompe datasets cada jueves a las&nbsp;19:00 en el aula
