@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sigma Data Club — UPV</title>
+<meta name="description" content="Club de ciencia de datos de la Universidad Politécnica de Valencia. Talleres, proyectos y comunidad.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="app.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">σ</span>
+      <span class="brand-name">Sigma <b>Data&nbsp;Club</b></span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">inicio</a>
+      <a href="sobre.html">sobre</a>
+      <a href="equipo.html">equipo</a>
+      <a href="eventos.html">eventos</a>
+      <a href="proyectos.html">proyectos</a>
+      <a href="blog.html">blog</a>
+      <a href="recursos.html">recursos</a>
+      <a href="unete.html">únete</a>
+    </nav>
+    <button class="theme-toggle" type="button">[ light ]</button>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">v3.2.1 · curso 2025/26 · UPV</span>
+      <h1>Construimos <span class="accent">data&nbsp;science</span> en la universidad,<br>línea&nbsp;a&nbsp;línea.</h1>
+      <p class="lead">Sigma Data Club es la comunidad de estudiantes de la Politécnica de Valencia que entrena modelos, publica análisis y rompe datasets cada jueves a las&nbsp;19:00 en el aula 1G&nbsp;2.4.</p>
+      <div class="hero-cta">
+        <a href="unete.html" class="btn btn-primary">únete al club</a>
+        <a href="eventos.html" class="btn btn-ghost">próximos eventos</a>
+      </div>
+
+      <div class="hero-meta">
+        <div class="row"><span class="key">status</span><span class="val accent">● activo · aceptando miembros</span></div>
+        <div class="row"><span class="key">cuota</span><span class="val">0 € · gratis para alumnos UPV</span></div>
+        <div class="row"><span class="key">stack</span><span class="val">Python · PyTorch · DuckDB · Polars · Quarto</span></div>
+      </div>
+    </div>
+
+    <aside>
+      <div class="terminal" aria-label="Terminal de bienvenida">
+        <div class="terminal-bar">
+          <span class="terminal-dot"></span>
+          <span class="terminal-dot"></span>
+          <span class="terminal-dot"></span>
+          <span class="terminal-title">~/sigma-data-club — bash</span>
+        </div>
+<div class="terminal-body"><span class="prompt">sigma@upv:~$</span> whoami
+<span class="out">→ club universitario de ciencia de datos</span>
+<span class="prompt">sigma@upv:~$</span> cat manifesto.txt
+<span class="cmt"># aprender haciendo, no leyendo slides</span>
+<span class="cmt"># compartir el código, no la pantalla</span>
+<span class="cmt"># proyectos reales con datos reales</span>
+<span class="prompt">sigma@upv:~$</span> ls /eventos/proximos
+<span class="key">2025-10-23</span>  <span class="val">workshop_pytorch_intro.md</span>
+<span class="key">2025-11-06</span>  <span class="val">datathon_renfe_open_data.md</span>
+<span class="key">2025-11-20</span>  <span class="val">charla_meta_ai_research.md</span>
+<span class="prompt">sigma@upv:~$</span> ./join.sh
+<span class="out">→ formulario en /unete</span><span class="cursor"></span></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Manifesto</span>
+        <h2>Aprender haciendo, no leyendo slides.</h2>
+      </div>
+      <span class="section-num">[ 01 / 04 ]</span>
+    </div>
+
+    <div class="grid grid-3">
+      <article class="card bracketed">
+        <div class="card-meta"><span class="tag">// 01</span><span>código</span></div>
+        <h3>git push antes de hablar</h3>
+        <p>Cada sesión termina con un repo público. No hay diapositiva que sustituya un Jupyter notebook abierto en GitHub.</p>
+      </article>
+      <article class="card bracketed">
+        <div class="card-meta"><span class="tag">// 02</span><span>datos</span></div>
+        <h3>datasets reales, no toy</h3>
+        <p>Trabajamos con datos abiertos del Ayuntamiento, RENFE, AEMET y la propia UPV. Lo que aprendes aquí se parece a lo que hace un científico de datos un martes.</p>
+      </article>
+      <article class="card bracketed">
+        <div class="card-meta"><span class="tag">// 03</span><span>comunidad</span></div>
+        <h3>senior ↔ junior, sin barrera</h3>
+        <p>Si llevas tres años con PyTorch o estás compilando tu primer pandas, hay sitio. La regla es ayudar a la persona de la fila de detrás.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Datos del club</span>
+        <h2>Por qué medimos todo.</h2>
+      </div>
+      <span class="section-num">[ 02 / 04 ]</span>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">Miembros activos</div>
+        <div class="stat-value">187</div>
+        <div class="stat-foot">+42 vs. curso anterior</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Eventos / semestre</div>
+        <div class="stat-value">24</div>
+        <div class="stat-foot">talleres · charlas · datathons</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Proyectos publicados</div>
+        <div class="stat-value">31</div>
+        <div class="stat-foot">en GitHub · MIT · open</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Grados representados</div>
+        <div class="stat-value">9</div>
+        <div class="stat-foot">ETSINF · ETSII · ADE · BIO …</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Próximo evento</span>
+        <h2>Nos vemos el jueves.</h2>
+      </div>
+      <span class="section-num">[ 03 / 04 ]</span>
+    </div>
+
+    <article class="event-next">
+      <div class="when">
+        <div class="day">23</div>
+        <div class="month">OCT 2025</div>
+        <div class="time">19:00 — 21:00</div>
+      </div>
+      <div>
+        <h3>Workshop · Tu primer modelo en PyTorch</h3>
+        <p>Sesión práctica para construir, entrenar y depurar un MLP desde cero usando el dataset MNIST. Todo el código en vivo, sin slides. Trae el portátil con Python 3.11 y un entorno limpio.</p>
+        <div class="where">→ Aula 1G 2.4 · Edificio ETSINF · libre acceso</div>
+      </div>
+      <div>
+        <a class="btn btn-primary" href="eventos.html">apuntarme</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Última hornada</span>
+        <h2>Lo que estamos construyendo.</h2>
+      </div>
+      <span class="section-num">[ 04 / 04 ]</span>
+    </div>
+
+    <div class="grid grid-2">
+      <article class="card clickable">
+        <div class="card-meta"><span class="tag">PROYECTO</span><span>en curso</span><span>NLP</span></div>
+        <h3>Análisis de actas del Senado UPV (2018→2024)</h3>
+        <p>Pipeline en Polars + spaCy para extraer temas y votaciones de las actas públicas del claustro. 1.2M tokens procesados.</p>
+      </article>
+      <article class="card clickable">
+        <div class="card-meta"><span class="tag">PROYECTO</span><span>publicado</span><span>VISIÓN</span></div>
+        <h3>Detector de aforo en bibliotecas UPV</h3>
+        <p>YOLOv8 + Raspberry Pi en la entrada de la Biblioteca Central. Datos abiertos en tiempo real para que sepas si hay sitio antes de subir.</p>
+      </article>
+      <article class="card clickable">
+        <div class="card-meta"><span class="tag">PROYECTO</span><span>en curso</span><span>OPEN&nbsp;DATA</span></div>
+        <h3>València en bici · OD analytics</h3>
+        <p>Análisis de los carriles bici y datos de Valenbisi. Visualización con Observable Plot. Colaboración con Carto.</p>
+      </article>
+      <article class="card clickable">
+        <div class="card-meta"><span class="tag">PROYECTO</span><span>archivado</span><span>ML</span></div>
+        <h3>Predictor de notas de corte UPV</h3>
+        <p>Modelo XGBoost entrenado con datos históricos de admisión 2014→2023. RMSE 0.42 sobre la escala 5–14.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="ascii-rule"></div>
+    <div class="row" style="justify-content: space-between; gap: 2rem;">
+      <div>
+        <h2 style="margin-bottom: 0.75rem;">¿Estudias en la UPV?<br><span class="accent">Te queremos en el club.</span></h2>
+        <p class="muted">Sin examen de entrada. Sin prerequisitos. Solo curiosidad y un portátil.</p>
+      </div>
+      <div>
+        <a href="unete.html" class="btn btn-primary">./join.sh</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div>
+      <div class="brand" style="margin-bottom: 0.6rem;">
+        <span class="brand-mark">σ</span>
+        <span class="brand-name">Sigma <b>Data&nbsp;Club</b></span>
+      </div>
+      <p class="muted" style="font-size: 0.85rem; max-width: 38ch;">Club estudiantil de ciencia de datos.<br>Universidad Politécnica de Valencia.</p>
+    </div>
+    <div>
+      <h4>Navegar</h4>
+      <ul>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="equipo.html">Equipo</a></li>
+        <li><a href="eventos.html">Eventos</a></li>
+        <li><a href="proyectos.html">Proyectos</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Recursos</h4>
+      <ul>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="recursos.html">Material</a></li>
+        <li><a href="unete.html">Únete</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="mailto:hola@sigma-data.upv.es">hola@sigma-data.upv.es</a></li>
+        <li><a href="https://github.com/sigma-data-club">github.com/sigma-data-club</a></li>
+        <li><a href="https://instagram.com/sigma.dataclub">@sigma.dataclub</a></li>
+      </ul>
+    </div>
+    <div class="bottom">
+      <span>© 2025 Sigma Data Club · UPV. Código bajo licencia MIT.</span>
+      <span>build 3.2.1 · last deploy 2025-10-21</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
