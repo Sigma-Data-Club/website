@@ -1,0 +1,34 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+  project: CollectionEntry<'proyectos'>;
+}
+const { project } = Astro.props;
+const { title, thumb, status, category, summary, contribCount, tags, repoUrl } = project.data;
+const categoryLower = category.toLowerCase();
+---
+
+<article class="project">
+  <div class="thumb">{thumb}</div>
+  <div>
+    <div class="meta">{status} · {categoryLower} · {contribCount} contribs</div>
+    <h3>{title}</h3>
+    <p>{summary}</p>
+    {
+      tags.length > 0 && (
+        <div class="tags">
+          {tags.map((t) => (
+            <span>{t}</span>
+          ))}
+        </div>
+      )
+    }
+  </div>
+  {
+    repoUrl && (
+      <a class="btn btn-ghost" href={repoUrl}>
+        repo
+      </a>
+    )
+  }
+</article>
