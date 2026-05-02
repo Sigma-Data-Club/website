@@ -6,14 +6,26 @@ interface Props {
 const { event } = Astro.props;
 const { title, date, durationMin, location, description, signupUrl } = event.data;
 
-const day = String(date.getDate()).padStart(2, '0');
+// All times must render in the club's local timezone (Europe/Madrid),
+// regardless of the build environment (GitHub Actions runs in UTC).
+const TZ = 'Europe/Madrid';
+
+const day = date.toLocaleDateString('es-ES', { timeZone: TZ, day: '2-digit' });
 const monthShort = date
-  .toLocaleDateString('es-ES', { month: 'short', year: 'numeric' })
+  .toLocaleDateString('es-ES', { timeZone: TZ, month: 'short' })
   .toUpperCase()
   .replace('.', '');
-const startTime = date.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+const startTime = date.toLocaleTimeString('es-ES', {
+  timeZone: TZ,
+  hour: '2-digit',
+  minute: '2-digit',
+});
 const end = new Date(date.getTime() + durationMin * 60_000);
-const endTime = end.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+const endTime = end.toLocaleTimeString('es-ES', {
+  timeZone: TZ,
+  hour: '2-digit',
+  minute: '2-digit',
+});
 ---
 
 <article class="event-next">
@@ -27,7 +39,13 @@ const endTime = end.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-di
     <p>{description}</p>
     <div class="where">→ {location}</div>
   </div>
-  <div>
-    <a class="btn btn-primary" href={signupUrl ?? '/eventos'}>apuntarme</a>
-  </div>
+  {
+    signupUrl && (
+      <div>
+        <a class="btn btn-primary" href={signupUrl}>
+          apuntarme
+        </a>
+      </div>
+    )
+  }
 </article>
