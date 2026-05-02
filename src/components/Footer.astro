@@ -1,3 +1,7 @@
+---
+import { withBase } from '../lib/url';
+---
+
 <footer class="site-footer">
   <div class="container">
     <div>
@@ -13,18 +17,18 @@
     <div>
       <h4>Navegar</h4>
       <ul>
-        <li><a href="/sobre">Sobre</a></li>
-        <li><a href="/equipo">Equipo</a></li>
-        <li><a href="/eventos">Eventos</a></li>
-        <li><a href="/proyectos">Proyectos</a></li>
+        <li><a href={withBase('/sobre')}>Sobre</a></li>
+        <li><a href={withBase('/equipo')}>Equipo</a></li>
+        <li><a href={withBase('/eventos')}>Eventos</a></li>
+        <li><a href={withBase('/proyectos')}>Proyectos</a></li>
       </ul>
     </div>
     <div>
       <h4>Recursos</h4>
       <ul>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/recursos">Material</a></li>
-        <li><a href="/unete">Únete</a></li>
+        <li><a href={withBase('/blog')}>Blog</a></li>
+        <li><a href={withBase('/recursos')}>Material</a></li>
+        <li><a href={withBase('/unete')}>Únete</a></li>
       </ul>
     </div>
     <div>

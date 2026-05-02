@@ -1,6 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import SectionHead from '../components/SectionHead.astro';
+import { withBase } from '../lib/url';
 
 // Terminal block ports legacy unete.html lines 163-168 verbatim.
 // `.terminal-body` uses `white-space: pre`, so column alignment via spaces is meaningful.
@@ -236,7 +237,7 @@ const contactTerminalHtml = `<span class="prompt">$</span> cat contact.txt
           <h3>¿Qué se hace exactamente cada jueves?</h3>
           <p class="muted">
             Workshop, charla, datathon o open hack — depende de la semana. El calendario completo
-            está en <a href="/eventos">/eventos</a>.
+            está en <a href={withBase('/eventos')}>/eventos</a>.
           </p>
         </article>
         <article class="card">

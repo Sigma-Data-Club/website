@@ -4,6 +4,7 @@ import PageLayout from '../layouts/PageLayout.astro';
 import SectionHead from '../components/SectionHead.astro';
 import PersonCard from '../components/PersonCard.astro';
 import TrackTable from '../components/TrackTable.astro';
+import { withBase } from '../lib/url';
 
 const all = await getCollection('equipo');
 const junta = all
@@ -61,7 +62,7 @@ const tracks = (await getCollection('tracks')).sort((a, b) => a.data.order - b.d
             presentarse.
           </p>
         </div>
-        <a href="/unete" class="btn btn-ghost">hazte socio primero</a>
+        <a href={withBase('/unete')} class="btn btn-ghost">hazte socio primero</a>
       </div>
     </div>
   </section>

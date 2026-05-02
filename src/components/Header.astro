@@ -1,12 +1,16 @@
 ---
 import Nav from './Nav.astro';
 import ThemeToggle from './ThemeToggle.astro';
-const currentPath = Astro.url.pathname;
+import { withBase } from '../lib/url';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const stripped = base ? Astro.url.pathname.replace(new RegExp(`^${base}`), '') : Astro.url.pathname;
+const currentPath = stripped === '' ? '/' : stripped;
 ---
 
 <header class="site-header">
   <div class="container">
-    <a class="brand" href="/">
+    <a class="brand" href={withBase('/')}>
       <span class="brand-mark">σ</span>
       <span class="brand-name">Sigma <b>Data&nbsp;Club</b></span>
     </a>
