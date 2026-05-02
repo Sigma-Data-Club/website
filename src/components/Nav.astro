@@ -1,0 +1,29 @@
+---
+const { currentPath } = Astro.props as { currentPath: string };
+
+const links = [
+  { href: '/', label: 'inicio', match: '/' },
+  { href: '/sobre', label: 'sobre', match: '/sobre' },
+  { href: '/equipo', label: 'equipo', match: '/equipo' },
+  { href: '/eventos', label: 'eventos', match: '/eventos' },
+  { href: '/proyectos', label: 'proyectos', match: '/proyectos' },
+  { href: '/blog', label: 'blog', match: '/blog' },
+  { href: '/recursos', label: 'recursos', match: '/recursos' },
+  { href: '/unete', label: 'únete', match: '/unete' },
+];
+
+function isActive(match: string, path: string): boolean {
+  if (match === '/') return path === '/' || path === '';
+  return path === match || path.startsWith(match + '/');
+}
+---
+
+<nav class="nav">
+  {
+    links.map((l) => (
+      <a href={l.href} class={isActive(l.match, currentPath) ? 'active' : undefined}>
+        {l.label}
+      </a>
+    ))
+  }
+</nav>

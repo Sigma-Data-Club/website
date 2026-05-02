@@ -1,0 +1,16 @@
+---
+import Nav from './Nav.astro';
+import ThemeToggle from './ThemeToggle.astro';
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/">
+      <span class="brand-mark">σ</span>
+      <span class="brand-name">Sigma <b>Data&nbsp;Club</b></span>
+    </a>
+    <Nav currentPath={currentPath} />
+    <ThemeToggle />
+  </div>
+</header>
