@@ -51,7 +51,7 @@ const equipo = defineCollection({
   type: 'content',
   schema: z.object({
     name: z.string(),
-    kind: z.enum(['junta', 'mentor']),
+    kind: z.enum(['junta', 'track-lead', 'mentor']),
     role: z.string(),
     initials: z.string(),
     bio: z.string(),
