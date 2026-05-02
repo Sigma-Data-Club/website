@@ -1,0 +1,25 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+  person: CollectionEntry<'equipo'>;
+}
+const { person } = Astro.props;
+const { name, role, initials, bio, github, linkedin } = person.data;
+---
+
+<article class="person">
+  <div class="avatar">{initials}</div>
+  <div>
+    <div class="name">{name}</div>
+    <div class="role">{role}</div>
+  </div>
+  <div class="bio">{bio}</div>
+  {
+    (github || linkedin) && (
+      <div class="links">
+        {github && <a href={github}>github</a>}
+        {linkedin && <a href={linkedin}>linkedin</a>}
+      </div>
+    )
+  }
+</article>
