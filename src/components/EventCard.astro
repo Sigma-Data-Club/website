@@ -1,0 +1,33 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+  event: CollectionEntry<'eventos'>;
+}
+const { event } = Astro.props;
+const { title, date, durationMin, location, description, signupUrl } = event.data;
+
+const day = String(date.getDate()).padStart(2, '0');
+const monthShort = date
+  .toLocaleDateString('es-ES', { month: 'short', year: 'numeric' })
+  .toUpperCase()
+  .replace('.', '');
+const startTime = date.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+const end = new Date(date.getTime() + durationMin * 60_000);
+const endTime = end.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+---
+
+<article class="event-next">
+  <div class="when">
+    <div class="day">{day}</div>
+    <div class="month">{monthShort}</div>
+    <div class="time">{startTime} — {endTime}</div>
+  </div>
+  <div>
+    <h3>{title}</h3>
+    <p>{description}</p>
+    <div class="where">→ {location}</div>
+  </div>
+  <div>
+    <a class="btn btn-primary" href={signupUrl ?? '/eventos'}>apuntarme</a>
+  </div>
+</article>

@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+  events: CollectionEntry<'eventos'>[];
+  mode: 'upcoming' | 'archive';
+}
+const { events, mode } = Astro.props;
+
+const pillClass = (t: string) => (t === 'datathon' ? 'pill warn' : 'pill');
+
+const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
+---
+
+<table class="tbl">
+  <thead>
+    <tr>
+      <th>fecha</th>
+      <th>tipo</th>
+      <th>título</th>
+      <th>ponente</th>
+      <th>lugar</th>
+      <th>{mode === 'upcoming' ? 'plazas' : 'asistentes'}</th>
+      {mode === 'archive' && <th>material</th>}
+    </tr>
+  </thead>
+  <tbody>
+    {
+      events.map((e) => (
+        <tr>
+          <td>{fmtDate(e.data.date)}</td>
+          <td>
+            <span class={pillClass(e.data.type)}>{e.data.type}</span>
+          </td>
+          <td>
+            <strong>{e.data.title}</strong>
+          </td>
+          <td>{e.data.speaker}</td>
+          <td>{e.data.location}</td>
+          <td>{mode === 'upcoming' ? (e.data.capacity ?? '—') : (e.data.attendees ?? '—')}</td>
+          {mode === 'archive' && (
+            <td>{e.data.materialUrl ? <a href={e.data.materialUrl}>ver</a> : '—'}</td>
+          )}
+        </tr>
+      ))
+    }
+  </tbody>
+</table>

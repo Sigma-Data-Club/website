@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionHead from '../components/SectionHead.astro';
+import EventCard from '../components/EventCard.astro';
+import EventTable from '../components/EventTable.astro';
+
+const now = new Date();
+const all = (await getCollection('eventos')).sort(
+  (a, b) => a.data.date.getTime() - b.data.date.getTime(),
+);
+const upcoming = all.filter((e) => e.data.date >= now);
+const archive = all.filter((e) => e.data.date < now).reverse();
+const next = upcoming[0];
+---
+
+<PageLayout
+  title="Eventos · Sigma Data Club"
+  eyebrow="/ eventos"
+  heading="Cada jueves, 19:00.<br>Aula 1G 2.4 · ETSINF."
+>
+  {
+    next && (
+      <section>
+        <div class="container">
+          <SectionHead eyebrow="Próximo evento" title="Esta semana." num="01 / 03" />
+          <EventCard event={next} />
+        </div>
+      </section>
+    )
+  }
+
+  <section>
+    <div class="container">
+      <SectionHead eyebrow="Calendario" title="Próximas sesiones." num="02 / 03" />
+      <EventTable events={upcoming} mode="upcoming" />
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <SectionHead eyebrow="Archivo" title="Eventos pasados." num="03 / 03" />
+      <EventTable events={archive} mode="archive" />
+    </div>
+  </section>
+</PageLayout>
