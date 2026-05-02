@@ -18,7 +18,7 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
       <th>tipo</th>
       <th>título</th>
       <th>ponente</th>
-      <th>lugar</th>
+      {mode === 'upcoming' && <th>lugar</th>}
       <th>{mode === 'upcoming' ? 'plazas' : 'asistentes'}</th>
       {mode === 'archive' && <th>material</th>}
     </tr>
@@ -35,7 +35,7 @@ const fmtDate = (d: Date) => d.toISOString().slice(0, 10);
             <strong>{e.data.title}</strong>
           </td>
           <td>{e.data.speaker}</td>
-          <td>{e.data.location}</td>
+          {mode === 'upcoming' && <td>{e.data.location}</td>}
           <td>{mode === 'upcoming' ? (e.data.capacity ?? '—') : (e.data.attendees ?? '—')}</td>
           {mode === 'archive' && (
             <td>{e.data.materialUrl ? <a href={e.data.materialUrl}>ver</a> : '—'}</td>
