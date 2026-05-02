@@ -1,5 +1,22 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+
+// `.terminal-body` uses `white-space: pre`. JSX template indentation would leak as
+// leading spaces on every line, so embed the legacy markup verbatim via set:html.
+const manifestoTerminalHtml = `<span class="cmt"># 1. publicar &gt; presentar</span>
+<span class="cmt">#    el repo es la diapositiva.</span>
+
+<span class="cmt"># 2. dataset real &gt; toy</span>
+<span class="cmt">#    si no pica, no enseña.</span>
+
+<span class="cmt"># 3. junior arrastra a senior</span>
+<span class="cmt">#    explicar es el mejor test.</span>
+
+<span class="cmt"># 4. open source por defecto</span>
+<span class="cmt">#    licencia MIT, sin excusas.</span>
+
+<span class="cmt"># 5. jueves a las 19:00</span>
+<span class="cmt">#    aula 1G 2.4. siempre.</span><span class="cursor"></span>`;
 ---
 
 <PageLayout
@@ -37,22 +54,7 @@ import PageLayout from '../layouts/PageLayout.astro';
               class="terminal-dot"></span>
             <span class="terminal-title">manifesto.md</span>
           </div>
-          <div class="terminal-body">
-            <span class="cmt"># 1. publicar &gt; presentar</span>
-            <span class="cmt"># el repo es la diapositiva.</span>
-
-            <span class="cmt"># 2. dataset real &gt; toy</span>
-            <span class="cmt"># si no pica, no enseña.</span>
-
-            <span class="cmt"># 3. junior arrastra a senior</span>
-            <span class="cmt"># explicar es el mejor test.</span>
-
-            <span class="cmt"># 4. open source por defecto</span>
-            <span class="cmt"># licencia MIT, sin excusas.</span>
-
-            <span class="cmt"># 5. jueves a las 19:00</span>
-            <span class="cmt"># aula 1G 2.4. siempre.</span><span class="cursor"></span>
-          </div>
+          <div class="terminal-body" set:html={manifestoTerminalHtml} />
         </div>
       </div>
     </div>

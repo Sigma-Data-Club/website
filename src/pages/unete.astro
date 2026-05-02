@@ -1,5 +1,21 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+
+// Terminal block ports legacy unete.html lines 163-168 verbatim.
+// `.terminal-body` uses `white-space: pre`, so column alignment via spaces is meaningful.
+// set:html bypasses JSX whitespace collapsing.
+const contactTerminalHtml = `<span class="prompt">$</span> cat contact.txt
+<span class="key">email</span>     <span class="val">hola@sigma-data.upv.es</span>
+<span class="key">github</span>    <span class="val">github.com/sigma-data-club</span>
+<span class="key">discord</span>   <span class="val">discord.gg/sigma-data</span>
+<span class="key">instagram</span> <span class="val">@sigma.dataclub</span>
+<span class="key">linkedin</span>  <span class="val">/company/sigma-data-club-upv</span>
+
+<span class="prompt">$</span> cat where.txt
+<span class="cmt"># Universidad Politécnica de Valencia</span>
+<span class="cmt"># Edificio 1G — ETSINF</span>
+<span class="cmt"># Aula 1G 2.4</span>
+<span class="cmt"># jueves · 19:00 — 21:00</span><span class="cursor"></span>`;
 ---
 
 <PageLayout
@@ -182,25 +198,7 @@ import PageLayout from '../layouts/PageLayout.astro';
                 class="terminal-dot"></span>
               <span class="terminal-title">contacto</span>
             </div>
-            <div class="terminal-body">
-              <span class="prompt">$</span> cat contact.txt
-              <span class="key">email</span>
-              <span class="val">hola@sigma-data.upv.es</span>
-              <span class="key">github</span>
-              <span class="val">github.com/sigma-data-club</span>
-              <span class="key">discord</span>
-              <span class="val">discord.gg/sigma-data</span>
-              <span class="key">instagram</span>
-              <span class="val">@sigma.dataclub</span>
-              <span class="key">linkedin</span>
-              <span class="val">/company/sigma-data-club-upv</span>
-
-              <span class="prompt">$</span> cat where.txt
-              <span class="cmt"># Universidad Politécnica de Valencia</span>
-              <span class="cmt"># Edificio 1G — ETSINF</span>
-              <span class="cmt"># Aula 1G 2.4</span>
-              <span class="cmt"># jueves · 19:00 — 21:00</span><span class="cursor"></span>
-            </div>
+            <div class="terminal-body" set:html={contactTerminalHtml} />
           </div>
         </aside>
       </div>
