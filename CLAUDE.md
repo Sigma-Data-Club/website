@@ -25,6 +25,7 @@ proyectos.html  blog.html  recursos.html  unete.html
 Every page hard-codes the same `<header class="site-header">` (with the full nav) and `<footer class="site-footer">`. There is no templating layer — **adding or renaming a page requires editing the nav block in all eight HTML files**.
 
 Each page links the same two assets:
+
 - `styles.css` — single stylesheet, terminal/hacker aesthetic, OKLCH color tokens.
 - `app.js` — runs as a single IIFE; handles theme toggle and active-nav highlighting.
 

@@ -3,3 +3,11 @@ dist
 node_modules
 package-lock.json
 src/styles/global.css
+
+# legacy site files — deleted in Task 12 cutover
+/*.html
+/app.js
+/styles.css
+
+# specs and plans are long-form prose; preserve as-is
+docs/
