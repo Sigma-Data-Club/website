@@ -1,0 +1,52 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { getEntries, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  title: string;
+  description?: string;
+  date: Date;
+  authors: CollectionEntry<'blog'>['data']['authors'];
+  tags: string[];
+}
+const { title, description, date, authors, tags } = Astro.props;
+const authorEntries = await getEntries(authors);
+const fmtDate = date.toLocaleDateString('es-ES', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={`${title} · Sigma Data Club`} description={description}>
+  <section class="page-head">
+    <div class="container">
+      <span class="eyebrow">/ blog</span>
+      <h1>{title}</h1>
+      <p class="lead">
+        {fmtDate}
+        {
+          authorEntries.length > 0 && (
+            <>
+              {' · por '}
+              {authorEntries.map((a, i) => (
+                <>
+                  {i > 0 && ', '}
+                  {a.data.name}
+                </>
+              ))}
+            </>
+          )
+        }
+      </p>
+      {tags.length > 0 && <p class="muted">{tags.map((t) => `#${t}`).join(' ')}</p>}
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <article class="prose">
+        <slot />
+      </article>
+    </div>
+  </section>
+</BaseLayout>
