@@ -90,7 +90,7 @@ const recursos = defineCollection({
       'apuntes',
     ]),
     kind: z.enum(['curso', 'libro', 'paper', 'vídeo', 'guía', 'repo', 'dataset']),
-    url: z.string().url(),
+    url: z.string().url().optional(),
     order: z.number().default(0),
   }),
 });
