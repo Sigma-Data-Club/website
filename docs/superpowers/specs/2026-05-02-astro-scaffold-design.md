@@ -58,7 +58,7 @@ Active-nav highlighting moves from runtime JS to build-time: `Header.astro` read
 
 ## Content Collections
 
-`src/content/config.ts` defines five collections. Only the blog collection renders body content into pages (MDX). The other four collections (`eventos`, `proyectos`, `equipo`, `recursos`) use frontmatter only — body is unused and may be omitted.
+`src/content/config.ts` defines six collections. Only the blog collection renders body content into pages (MDX). The other five collections (`eventos`, `proyectos`, `equipo`, `tracks`, `recursos`) use frontmatter only — body is unused and may be omitted.
 
 Schema syntax below is pseudocode for readability. Actual implementation uses real Zod (`z.string()`, `z.string().optional()`, `z.enum([...])`, `z.array(reference('equipo'))`, etc.) inside `defineCollection({ schema: z.object({...}) })`.
 
@@ -83,11 +83,14 @@ Schema syntax below is pseudocode for readability. Actual implementation uses re
   title: string,
   date: Date,                  // ISO datetime; used to split próximos vs pasados
   durationMin: number,         // default 120
-  location: string,            // e.g. "Aula 1G 2.4 · ETSINF"
-  type: 'workshop' | 'charla' | 'datathon' | 'social',
+  location: string,            // e.g. "Aula 1G 2.4 · ETSINF" or "Salón actos ETSINF"
+  type: 'workshop' | 'charla' | 'datathon' | 'social' | 'open hack',
+  speaker: string,             // free text — internal name or external "Vicent Climent (Carto)"
   description: string,
+  capacity: string.optional(), // free text: "40 / 50", "libre", "—"
+  attendees: number.optional(),// post-event count
   signupUrl: string.optional(),
-  recap: string.optional()     // post-event link
+  materialUrl: string.optional() // recap / slides / repo for past events
 }
 ```
 
@@ -95,14 +98,16 @@ Schema syntax below is pseudocode for readability. Actual implementation uses re
 
 ```ts
 {
-  title: string,
+  title: string,               // slug-style, e.g. "actas-senado-upv"
+  thumb: string,               // short label shown on card thumbnail: "NLP", "OD", "RAG"
   status: 'en curso' | 'publicado' | 'archivado',
   category: 'NLP' | 'Visión' | 'ML' | 'Open Data' | 'MLOps' | 'Otro',
   tags: string[],
-  summary: string,             // 1-2 sentences for cards
+  summary: string,             // 2-4 sentences shown on card
+  contribCount: number,        // shown in meta line as "N contribs"
   repoUrl: string.optional(),
   demoUrl: string.optional(),
-  contributors: reference('equipo')[]
+  contributors: reference('equipo')[].optional()  // typed refs when known; count remains the source of truth for display
 }
 ```
 
@@ -111,14 +116,28 @@ Schema syntax below is pseudocode for readability. Actual implementation uses re
 ```ts
 {
   name: string,
-  role: string,                // "presidenta", "vocal · NLP track"
+  kind: 'junta' | 'mentor',    // junta = elected board, mentor = alumni/professor
+  role: string,                // "presidenta", "vocal · NLP track", "profesora · DSIC", "alumni · 2018"
   initials: string,            // "CR" — used as avatar text
-  grade: string,               // "4.º GIIC", "Máster en CD"
   bio: string,
+  grade: string.optional(),    // "4.º GIIC", "Máster en CD" — required for junta, omitted for mentors
   github: string.optional(),
   linkedin: string.optional(),
-  period: string,              // "2025/26"
-  order: number                // sort key for display
+  period: string.optional(),   // "2025/26" — applies to junta only
+  order: number                // sort key within kind
+}
+```
+
+### `tracks` (md)
+
+```ts
+{
+  name: string,                // "NLP", "Visión", "MLOps", "Open data", "Estadística aplicada", "Bio data"
+  lead: string,                // free text; not all leads are in the equipo collection
+  program: string,             // "Máster IA", "4.º GIIC", "5.º GIIC"
+  focus: string,               // "RAG sobre actas UPV"; use "—" when none
+  status: 'activo' | 'en formación' | 'vacante',
+  order: number
 }
 ```
 
@@ -158,10 +177,12 @@ src/components/
   Card.astro           # generic .card wrapper; bracketed/clickable variants via props
   Stat.astro           # single .stat tile
   Terminal.astro       # .terminal block; slot for body lines
-  EventCard.astro      # event row (date column + body + CTA)
+  EventCard.astro      # event row (date column + body + CTA) — used for "next event" / featured
+  EventTable.astro     # .tbl table row layout used by eventos calendar + archive
   ProjectCard.astro    # proyectos card with tag/status/category meta
   PostCard.astro       # blog index list item
   PersonCard.astro     # equipo .person card
+  TrackTable.astro     # .tbl row layout for tracks
   ResourceItem.astro   # .res-item row
   ResourceGroup.astro  # .res-group wrapper around items of one group
 ```
@@ -176,7 +197,7 @@ Theme toggle: button is a component; the actual init/persist logic stays as an i
 src/pages/
   index.astro              # hero + manifesto + stats + next event + recent projects
   sobre.astro              # static prose page
-  equipo.astro             # getCollection('equipo'), sorted by order
+  equipo.astro             # getCollection('equipo') split by kind=junta|mentor + getCollection('tracks') as middle table section
   eventos.astro            # getCollection('eventos'), split: date >= now (próximos) | else pasados
   proyectos.astro          # getCollection('proyectos'), grouped by status
   recursos.astro           # getCollection('recursos'), grouped by group
@@ -274,6 +295,9 @@ No ESLint. `astro check` covers TypeScript and content schema validation; Pretti
 │   │   ├── equipo/
 │   │   │   ├── _template.md
 │   │   │   └── *.md
+│   │   ├── tracks/
+│   │   │   ├── _template.md
+│   │   │   └── *.md
 │   │   └── recursos/
 │   │       ├── _template.md
 │   │       └── *.md
@@ -296,7 +320,7 @@ Each phase is independently verifiable.
 2. **Global styles + BaseLayout + Header/Footer/ThemeToggle.** Copy `styles.css` to `src/styles/global.css`. Build BaseLayout with theme inline-script. Verify: navigate empty pages, dark/light toggle persists, no FOUC.
 3. **Static pages: `sobre`, `unete`.** Port HTML to `.astro` with existing classes. Verify: visual diff vs current pages. `unete` form behavior preserved as-is (decision deferred).
 4. **Content schemas + templates.** Write `src/content/config.ts` and `_template.{md,mdx}` per collection. Verify: `astro check` passes with empty collections.
-5. **Migrate `equipo`.** Port four entries from current `equipo.html` to `.md`. Build `equipo.astro`. Verify: visual match.
+5. **Migrate `equipo` + `tracks`.** Port six junta entries + four mentores to `equipo/*.md`, six track leads to `tracks/*.md` from current `equipo.html`. Build `equipo.astro` rendering all three sections. Verify: visual match.
 6. **Migrate `recursos`.** Port ~25 entries across 7 groups. Build `recursos.astro` with `ResourceGroup`. Verify: visual match.
 7. **Migrate `proyectos`.** Port four entries from `index.html` and any extras from `proyectos.html`. Build `proyectos.astro`. Verify: visual match.
 8. **Migrate `eventos`.** Port entries from `eventos.html`. Build `eventos.astro` with próximos/pasados split. Verify: visual match.
