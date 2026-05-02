@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import SectionHead from '../components/SectionHead.astro';
 
 // Terminal block ports legacy unete.html lines 163-168 verbatim.
 // `.terminal-body` uses `white-space: pre`, so column alignment via spaces is meaningful.
@@ -207,13 +208,7 @@ const contactTerminalHtml = `<span class="prompt">$</span> cat contact.txt
 
   <section>
     <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">FAQ</span>
-          <h2>Lo que más nos preguntan.</h2>
-        </div>
-        <span class="section-num">[ 5 preguntas ]</span>
-      </div>
+      <SectionHead eyebrow="FAQ" title="Lo que más nos preguntan." num="5 preguntas" />
 
       <div class="grid grid-2">
         <article class="card">

@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import SectionHead from '../components/SectionHead.astro';
 
 // `.terminal-body` uses `white-space: pre`. JSX template indentation would leak as
 // leading spaces on every line, so embed the legacy markup verbatim via set:html.
@@ -27,13 +28,7 @@ const manifestoTerminalHtml = `<span class="cmt"># 1. publicar &gt; presentar</s
 >
   <section>
     <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Misión</span>
-          <h2>Por qué existe el club.</h2>
-        </div>
-        <span class="section-num">[ 01 / 03 ]</span>
-      </div>
+      <SectionHead eyebrow="Misión" title="Por qué existe el club." num="01 / 03" />
 
       <div class="grid grid-2">
         <div>
@@ -62,13 +57,11 @@ const manifestoTerminalHtml = `<span class="cmt"># 1. publicar &gt; presentar</s
 
   <section>
     <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Historia</span>
-          <h2>De 8 personas en Telegram a 187 socios.</h2>
-        </div>
-        <span class="section-num">[ 02 / 03 ]</span>
-      </div>
+      <SectionHead
+        eyebrow="Historia"
+        title="De 8 personas en Telegram a 187 socios."
+        num="02 / 03"
+      />
 
       <div class="timeline">
         <div class="timeline-item">
@@ -125,13 +118,7 @@ const manifestoTerminalHtml = `<span class="cmt"># 1. publicar &gt; presentar</s
 
   <section>
     <div class="container">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">Valores</span>
-          <h2>Lo que nos hace fáciles de reconocer.</h2>
-        </div>
-        <span class="section-num">[ 03 / 03 ]</span>
-      </div>
+      <SectionHead eyebrow="Valores" title="Lo que nos hace fáciles de reconocer." num="03 / 03" />
 
       <div class="grid grid-3">
         <article class="card bracketed">
