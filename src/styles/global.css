@@ -418,7 +418,7 @@ section:last-of-type { border-bottom: none; }
 .terminal-dot:nth-child(1) { background: oklch(65% 0.20 25); }
 .terminal-dot:nth-child(2) { background: oklch(82% 0.16 90); }
 .terminal-dot:nth-child(3) { background: oklch(70% 0.16 145); }
-.terminal-title { margin-left: 0.5rem; }
+.terminal-title { margin-left: 0.5rem; color: var(--fg); font-weight: 600; }
 
 .terminal-body {
   padding: 1.25rem 1.4rem;
@@ -431,7 +431,7 @@ section:last-of-type { border-bottom: none; }
 .terminal-body .out { color: var(--muted); }
 .terminal-body .key { color: var(--warn); }
 .terminal-body .val { color: var(--fg); }
-.terminal-body .cmt { color: var(--dim); }
+.terminal-body .cmt { color: var(--muted); }
 
 .cursor {
   display: inline-block;
