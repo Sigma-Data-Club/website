@@ -12,6 +12,7 @@ const pillClass = (t: string) => (t === 'datathon' ? 'pill warn' : 'pill');
 const fmtDate = (d: Date) => d.toLocaleDateString('en-CA', { timeZone: 'Europe/Madrid' });
 ---
 
+<div class="table-wrap">
 <table class="tbl">
   <thead>
     <tr>
@@ -46,3 +47,4 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-CA', { timeZone: 'Europe/M
     }
   </tbody>
 </table>
+</div>
