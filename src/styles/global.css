@@ -660,21 +660,11 @@ section:last-of-type { border-bottom: none; }
   transition: border-color .15s;
 }
 .person:hover { border-color: var(--accent-dim); }
+a.person { color: inherit; text-decoration: none; cursor: pointer; }
+a.person:hover { border-color: var(--accent); }
+a.person:hover .name { color: var(--accent); }
+a.person:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-.avatar {
-  width: 56px;
-  height: 56px;
-  display: grid;
-  place-items: center;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: 50%;
-  background: var(--surface-2);
-  letter-spacing: -0.02em;
-}
 .person .name { font-weight: 700; color: var(--fg); }
 .person .role { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; }
 .person .bio { font-size: 0.85rem; color: var(--muted); }

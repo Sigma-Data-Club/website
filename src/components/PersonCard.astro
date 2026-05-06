@@ -4,22 +4,18 @@ interface Props {
   person: CollectionEntry<'equipo'>;
 }
 const { person } = Astro.props;
-const { name, role, initials, bio, github, linkedin } = person.data;
+const { name, role, bio, url, linkedin, github } = person.data;
+const link = url ?? linkedin ?? github;
+const Tag = link ? 'a' : 'article';
+const linkProps = link
+  ? { href: link, target: '_blank', rel: 'noopener noreferrer', 'aria-label': `Abrir perfil de ${name}` }
+  : {};
 ---
 
-<article class="person">
-  <div class="avatar">{initials}</div>
+<Tag class="person" {...linkProps}>
   <div>
     <div class="name">{name}</div>
     <div class="role">{role}</div>
   </div>
   <div class="bio">{bio}</div>
-  {
-    (github || linkedin) && (
-      <div class="links">
-        {github && <a href={github}>github</a>}
-        {linkedin && <a href={linkedin}>linkedin</a>}
-      </div>
-    )
-  }
-</article>
+</Tag>
