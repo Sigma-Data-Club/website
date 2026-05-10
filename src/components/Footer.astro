@@ -1,5 +1,7 @@
 ---
+import { Mail01Icon, Github01Icon, InstagramIcon, Linkedin01Icon } from '@hugeicons/core-free-icons';
 import { withBase } from '../lib/url';
+import Icon from './Icon.astro';
 ---
 
 <footer class="site-footer">
@@ -10,7 +12,7 @@ import { withBase } from '../lib/url';
         <span class="brand-name">Sigma <b>Data&nbsp;Club</b></span>
       </div>
       <p class="muted" style="font-size: 0.85rem; max-width: 38ch;">
-        Club estudiantil de ciencia de datos.<br />
+        Club de ciencia de datos e IA de Generación Espontánea.<br />
         Universidad Politécnica de Valencia.
       </p>
     </div>
@@ -33,15 +35,28 @@ import { withBase } from '../lib/url';
     </div>
     <div>
       <h4>Contacto</h4>
-      <ul>
-        <li><a href="mailto:hola@sigma-data.upv.es">hola@sigma-data.upv.es</a></li>
-        <li><a href="https://github.com/sigma-data-club">github.com/sigma-data-club</a></li>
-        <li><a href="https://instagram.com/sigma.dataclub">@sigma.dataclub</a></li>
+      <ul class="contact-list">
+        <li>
+          <a href="mailto:sigmaclub.upv@gmail.com">
+            <Icon icon={Mail01Icon} /> sigmaclub.upv@gmail.com
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/sigma-data-club">
+            <Icon icon={Github01Icon} /> github.com/sigma-data-club
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/sigma_dc_upv/">
+            <Icon icon={InstagramIcon} /> @sigma_dc_upv
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/company/sigma-data-club-upv">
+            <Icon icon={Linkedin01Icon} /> linkedin.com/company/sigma-data-club-upv
+          </a>
+        </li>
       </ul>
-    </div>
-    <div class="bottom">
-      <span>© 2025 Sigma Data Club · UPV. Código bajo licencia MIT.</span>
-      <span>build 3.2.1 · last deploy 2025-10-21</span>
     </div>
   </div>
 </footer>

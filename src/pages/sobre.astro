@@ -1,57 +1,28 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import SectionHead from '../components/SectionHead.astro';
-
-// `.terminal-body` uses `white-space: pre`. JSX template indentation would leak as
-// leading spaces on every line, so embed the legacy markup verbatim via set:html.
-const manifestoTerminalHtml = `<span class="val"># 1. publicar &gt; presentar</span>
-<span class="cmt">#    el repo es la diapositiva.</span>
-
-<span class="val"># 2. dataset real &gt; toy</span>
-<span class="cmt">#    si no pica, no enseña.</span>
-
-<span class="val"># 3. junior arrastra a senior</span>
-<span class="cmt">#    explicar es el mejor test.</span>
-
-<span class="val"># 4. open source por defecto</span>
-<span class="cmt">#    licencia MIT, sin excusas.</span>
-
-<span class="val"># 5. jueves a las 19:00</span>
-<span class="cmt">#    aula 1G 2.4. siempre.</span><span class="cursor"></span>`;
 ---
 
 <PageLayout
   title="Sobre · Sigma Data Club"
   eyebrow="/ sobre"
   heading="Una comunidad de estudiantes<br />que escribe código antes de hablar."
-  lead="Sigma Data Club lo fundaron en 2021 Laiqian Ji, Ernesto Martínez y Andreu Bonet, junto a tres compañeros de clase escogidos por su proactividad: en la UPV no había ningún club especializado en IA y ciencia de datos, así que lo montaron ellos. De aquellos seis iniciales somos hoy 165, repartidos en nueve grados, con un mismo hábito: cada jueves nos juntamos a hacer algo con datos."
+  lead="Sigma Data Club lo fundaron en 2024 Laiqian Ji, Ernesto Martínez y Andreu Bonet, junto a tres compañeros de clase escogidos por su proactividad: en la UPV no había ningún club especializado en IA y ciencia de datos, así que lo montaron ellos. De aquellos seis iniciales somos hoy 165, repartidos en diferentes grados."
 >
   <section>
     <div class="container">
       <SectionHead eyebrow="Misión" title="Por qué existe el club." num="01 / 03" />
 
-      <div class="grid grid-2">
-        <div>
-          <p style="margin-bottom: 1rem;">
-            La universidad enseña teoría. El mercado pide reproducibilidad. El club existe para
-            cubrir ese hueco: un sitio donde practicar el oficio de la ciencia de datos con
-            problemas reales antes de que tengas que cobrar por hacerlo.
-          </p>
-          <p>
-            No somos academia. No vendemos cursos. No prometemos puestos en Google. Lo que ofrecemos
-            es tiempo compartido con personas que también quieren mejorar, datasets que pican de
-            verdad y la disciplina de publicar el código.
-          </p>
-        </div>
-        <div class="terminal">
-          <div class="terminal-bar">
-            <span class="terminal-dot"></span><span class="terminal-dot"></span><span
-              class="terminal-dot"></span>
-            <span class="terminal-title">manifesto.md</span>
-          </div>
-          <div class="terminal-body" set:html={manifestoTerminalHtml} />
-        </div>
-      </div>
+      <p style="margin-bottom: 1rem;">
+        La universidad enseña teoría. El mercado pide reproducibilidad. El club existe para
+        cubrir ese hueco: un sitio donde practicar el oficio de la ciencia de datos con
+        problemas reales antes de que tengas que cobrar por hacerlo.
+      </p>
+      <p>
+        No somos academia. No vendemos cursos. No prometemos puestos en Google. Lo que ofrecemos
+        es tiempo compartido con personas que también quieren mejorar, datasets que pican de
+        verdad y la disciplina de publicar el código.
+      </p>
     </div>
   </section>
 
@@ -65,7 +36,7 @@ const manifestoTerminalHtml = `<span class="val"># 1. publicar &gt; presentar</s
 
       <div class="timeline">
         <div class="timeline-item">
-          <div class="date">2021 · Q1</div>
+          <div class="date">2024 · Q1</div>
           <h3>Tres fundadores y un hueco evidente</h3>
           <p>
             Laiqian Ji, Ernesto Martínez y Andreu Bonet ven que en la UPV no hay ningún club
@@ -74,7 +45,7 @@ const manifestoTerminalHtml = `<span class="val"># 1. publicar &gt; presentar</s
           </p>
         </div>
         <div class="timeline-item">
-          <div class="date">2021 · Q4</div>
+          <div class="date">2024 · Q4</div>
           <h3>Primera datathon presencial</h3>
           <p>
             24 horas en el aula 1G 2.4 con datos abiertos del Ayuntamiento de València. 14 equipos,
@@ -82,7 +53,7 @@ const manifestoTerminalHtml = `<span class="val"># 1. publicar &gt; presentar</s
           </p>
         </div>
         <div class="timeline-item">
-          <div class="date">2022 · Q3</div>
+          <div class="date">2024 · Q3</div>
           <h3>Reconocidos como asociación oficial UPV</h3>
           <p>
             El Vicerrectorado de Estudiantes nos da espacio fijo y un microbudget para café y
@@ -90,7 +61,7 @@ const manifestoTerminalHtml = `<span class="val"># 1. publicar &gt; presentar</s
           </p>
         </div>
         <div class="timeline-item">
-          <div class="date">2023 · Q1</div>
+          <div class="date">2024 · Q3</div>
           <h3>Primer ciclo de talleres semanales</h3>
           <p>
             16 sesiones de PyTorch, MLOps y SQL avanzado a lo largo del cuatrimestre. 96 personas

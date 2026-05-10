@@ -1,0 +1,48 @@
+---
+type IconSvgObject = readonly (readonly [string, { readonly [key: string]: string | number }])[];
+
+interface Props {
+  icon: IconSvgObject;
+  size?: number;
+  label?: string;
+}
+
+const { icon, size = 18, label } = Astro.props;
+
+const camelToKebab = (s: string) => s.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
+const renderAttrs = (attrs: { readonly [key: string]: string | number }) =>
+  Object.entries(attrs)
+    .filter(([k]) => k !== 'key')
+    .map(([k, v]) => `${camelToKebab(k)}="${v}"`)
+    .join(' ');
+
+const childrenHtml = icon.map(([tag, attrs]) => `<${tag} ${renderAttrs(attrs)} />`).join('');
+---
+
+{
+  label ? (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      role="img"
+      aria-label={label}
+      set:html={childrenHtml}
+    />
+  ) : (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      aria-hidden="true"
+      focusable="false"
+      set:html={childrenHtml}
+    />
+  )
+}

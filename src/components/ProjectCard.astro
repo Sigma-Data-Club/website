@@ -8,9 +8,13 @@ const { title, thumb, status, category, summary, contribCount, tags, repoUrl } =
 const categoryLower = category.toLowerCase();
 const contribLabel =
   contribCount === undefined ? null : `${contribCount} contrib${contribCount === 1 ? '' : 's'}`;
+const Tag = repoUrl ? 'a' : 'article';
+const linkProps = repoUrl
+  ? { href: repoUrl, target: '_blank', rel: 'noopener noreferrer' }
+  : {};
 ---
 
-<article class="project">
+<Tag class:list={['project', { 'project-link': !!repoUrl }]} {...linkProps}>
   <div class="thumb">{thumb}</div>
   <div>
     <div class="meta">
@@ -28,11 +32,5 @@ const contribLabel =
       )
     }
   </div>
-  {
-    repoUrl && (
-      <a class="btn btn-ghost" href={repoUrl}>
-        repo
-      </a>
-    )
-  }
-</article>
+  {repoUrl && <span class="project-cta" aria-hidden="true">repo →</span>}
+</Tag>
