@@ -6,5 +6,4 @@ location: 'Salón actos ETSINF'
 type: charla
 speaker: 'Roberto Llinares'
 description: 'Charla sobre inferencia causal aplicada: DAGs, do-calculus y cómo evitar confusores en experimentos de datos para ingenieros.'
-attendees: 62
 ---

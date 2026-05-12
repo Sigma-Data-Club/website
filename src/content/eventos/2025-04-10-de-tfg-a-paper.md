@@ -6,5 +6,4 @@ location: 'Salón actos ETSINF'
 type: charla
 speaker: 'Dra. Pilar Guzmán'
 description: 'Charla de la Dra. Pilar Guzmán sobre el proceso de transformar un TFG en un artículo publicable: estructura, revisión y elección de venue.'
-attendees: 78
 ---

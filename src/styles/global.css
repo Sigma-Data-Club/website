@@ -16,6 +16,11 @@
   --warn:      oklch(80% 0.16 90);
   --danger:    oklch(70% 0.20 25);
 
+  /* event pill palette — see CLAUDE.md / src/components/EventTable.astro */
+  --pill-blue:   oklch(68% 0.16 250);
+  --pill-yellow: oklch(85% 0.17 95);
+  --pill-orange: oklch(75% 0.18 55);
+
   --font-mono: 'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', Menlo, ui-monospace, monospace;
   --font-display: 'JetBrains Mono', 'IBM Plex Mono', 'SF Mono', Menlo, ui-monospace, monospace;
 
@@ -603,6 +608,9 @@ section:last-of-type { border-bottom: none; }
 }
 .tbl .pill.dim { color: var(--muted); border-color: var(--border); }
 .tbl .pill.warn { color: var(--warn); border-color: var(--warn); }
+.tbl .pill.blue { color: var(--pill-blue); border-color: var(--pill-blue); }
+.tbl .pill.yellow { color: var(--pill-yellow); border-color: var(--pill-yellow); }
+.tbl .pill.orange { color: var(--pill-orange); border-color: var(--pill-orange); }
 
 .table-wrap {
   overflow-x: auto;

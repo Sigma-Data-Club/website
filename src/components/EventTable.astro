@@ -6,7 +6,7 @@ interface Props {
 }
 const { events, mode } = Astro.props;
 
-const pillClass = (t: string) => (t === 'datathon' ? 'pill warn' : 'pill');
+const pillClass = (c: 'blue' | 'yellow' | 'orange') => `pill ${c}`;
 
 // ISO date in Europe/Madrid (matches the slug date), independent of build TZ.
 const fmtDate = (d: Date) => d.toLocaleDateString('en-CA', { timeZone: 'Europe/Madrid' });
@@ -21,8 +21,7 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-CA', { timeZone: 'Europe/M
       <th>título</th>
       <th>ponente</th>
       {mode === 'upcoming' && <th>lugar</th>}
-      <th>{mode === 'upcoming' ? 'plazas' : 'asistentes'}</th>
-      {mode === 'archive' && <th>material</th>}
+      {mode === 'upcoming' && <th>plazas</th>}
     </tr>
   </thead>
   <tbody>
@@ -31,17 +30,14 @@ const fmtDate = (d: Date) => d.toLocaleDateString('en-CA', { timeZone: 'Europe/M
         <tr>
           <td>{fmtDate(e.data.date)}</td>
           <td>
-            <span class={pillClass(e.data.type)}>{e.data.type}</span>
+            <span class={pillClass(e.data.color)}>{e.data.type}</span>
           </td>
           <td>
             <strong>{e.data.title}</strong>
           </td>
           <td>{e.data.speaker}</td>
           {mode === 'upcoming' && <td>{e.data.location}</td>}
-          <td>{mode === 'upcoming' ? (e.data.capacity ?? '—') : (e.data.attendees ?? '—')}</td>
-          {mode === 'archive' && (
-            <td>{e.data.materialUrl ? <a href={e.data.materialUrl}>ver</a> : '—'}</td>
-          )}
+          {mode === 'upcoming' && <td>{e.data.capacity ?? '—'}</td>}
         </tr>
       ))
     }

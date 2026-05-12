@@ -6,5 +6,4 @@ location: 'Aula 1G 2.4 · ETSINF'
 type: open hack
 speaker: 'Comunidad'
 description: 'Sesión abierta de hacking de primavera: colaboración en proyectos del club, pair programming y demos espontáneas.'
-attendees: 41
 ---

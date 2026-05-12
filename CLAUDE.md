@@ -73,6 +73,11 @@ Push to `main` triggers `.github/workflows/deploy.yml`, which uses `withastro/ac
 - Editorial voice: Spanish, lowercase eyebrows, terminal/CLI metaphors (`./join.sh`, `git push antes de hablar`).
 - Section numbering: each top-level `<section>` on a content page gets a `.section-num` like `[ 02 / 04 ]`. Updating the count means updating every section on that page.
 - The brand mark is the literal character `σ` inside `<span class="brand-mark">`.
+- Event type pills in `EventTable.astro` are driven by the `color` field on each event frontmatter. Three options, mapped to vars `--pill-blue`, `--pill-yellow`, `--pill-orange` in `global.css`:
+  - `blue` → azul. Default. Workshops, charlas, sociales, open hack.
+  - `yellow` → amarillo. Datathon o evento especial.
+  - `orange` → naranja. Hack night o evento experimental.
+  Older `.pill.warn` and `.pill.dim` variants remain available for other tables but are not used at the moment.
 
 ## Spec history
 

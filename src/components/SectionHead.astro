@@ -1,7 +1,7 @@
 ---
 interface Props {
   eyebrow: string;
-  title: string;
+  title?: string;
   num?: string; // e.g. "01 / 04"
 }
 const { eyebrow, title, num } = Astro.props;
@@ -10,7 +10,7 @@ const { eyebrow, title, num } = Astro.props;
 <div class="section-head">
   <div>
     <span class="eyebrow">{eyebrow}</span>
-    <h2>{title}</h2>
+    {title && <h2>{title}</h2>}
   </div>
   {num && <span class="section-num">[ {num} ]</span>}
 </div>

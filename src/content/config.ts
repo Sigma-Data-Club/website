@@ -22,12 +22,11 @@ const eventos = defineCollection({
     durationMin: z.number().default(120),
     location: z.string(),
     type: z.enum(['workshop', 'charla', 'datathon', 'social', 'open hack']),
+    color: z.enum(['blue', 'yellow', 'orange']).default('blue'),
     speaker: z.string(),
     description: z.string(),
     capacity: z.string().optional(),
-    attendees: z.number().optional(),
     signupUrl: z.string().url().optional(),
-    materialUrl: z.string().url().optional(),
   }),
 });
 
