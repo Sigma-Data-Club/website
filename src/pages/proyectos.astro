@@ -12,7 +12,7 @@ const archivo = all.filter((p) => p.data.status === 'archivado');
 <PageLayout
   title="Proyectos · Sigma Data Club"
   eyebrow="/ proyectos"
-  heading="31 repos.<br>Open source. <span class='accent'>MIT.</span>"
+  heading="Código abierto.<br>Todo en GitHub. <span class='accent'>MIT.</span>"
   lead={`Todo lo que sale del club vive en <a href="https://github.com/sigma-data-club">github.com/sigma-data-club</a>. Cada proyecto tiene un README con instrucciones reproducibles, dataset versionado y al menos un test que valida el pipeline.`}
 >
   <section>
@@ -35,30 +35,30 @@ const archivo = all.filter((p) => p.data.status === 'archivado');
 
   <section>
     <div class="container">
-      <SectionHead eyebrow="Cómo proponer un proyecto" title="Tres pasos." num="03 / 03" />
+      <SectionHead eyebrow="Propuestas" title="Del board al repo." num="03 / 03" />
       <div class="grid grid-3">
         <article class="card bracketed">
           <div class="card-meta"><span class="tag">// 01</span></div>
-          <h3>Abre un issue</h3>
+          <h3>Habla con el board</h3>
           <p>
-            En el monorepo <code>sigma-data-club/.proposals</code>. Plantilla incluida: pregunta,
-            dataset, hipótesis, esfuerzo estimado.
+            Acércate a cualquier miembro de la junta — en sesión, por Discord o por mail — con
+            pregunta, dataset, hipótesis y esfuerzo estimado. Te respondemos en la misma semana.
           </p>
         </article>
         <article class="card bracketed">
           <div class="card-meta"><span class="tag">// 02</span></div>
-          <h3>Defiéndelo en una sesión</h3>
+          <h3>Defiéndelo en sesión</h3>
           <p>
-            5 minutos en cualquier jueves. Si dos socios se apuntan a colaborar, el track lead lo
-            aprueba y abrimos repo.
+            5 minutos en cualquier jueves: por qué importa, qué vas a medir y qué necesitas. Si
+            dos socios se apuntan a colaborar, la junta lo aprueba en el acto.
           </p>
         </article>
         <article class="card bracketed">
           <div class="card-meta"><span class="tag">// 03</span></div>
-          <h3>Publica</h3>
+          <h3>Pónlo en marcha</h3>
           <p>
-            README con setup reproducible, dataset versionado en DVC, al menos un test. Cuando
-            merguemos a <code>main</code>, lo anunciamos en la newsletter.
+            Abrimos repo bajo MIT, defines milestones y kick-off. README con setup reproducible,
+            dataset versionado y al menos un test antes del primer merge a <code>main</code>.
           </p>
         </article>
       </div>
