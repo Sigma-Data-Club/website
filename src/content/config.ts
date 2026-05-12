@@ -50,7 +50,7 @@ const equipo = defineCollection({
   type: 'content',
   schema: z.object({
     name: z.string(),
-    kind: z.enum(['junta', 'track-lead', 'mentor']),
+    kind: z.enum(['junta', 'mentor']),
     role: z.string(),
     bio: z.string(),
     grade: z.string().optional(),
@@ -58,18 +58,6 @@ const equipo = defineCollection({
     github: z.string().url().optional(),
     linkedin: z.string().url().optional(),
     period: z.string().optional(),
-    order: z.number().default(0),
-  }),
-});
-
-const tracks = defineCollection({
-  type: 'content',
-  schema: z.object({
-    name: z.string(),
-    lead: z.string(),
-    program: z.string(),
-    focus: z.string(),
-    status: z.enum(['activo', 'en formación', 'vacante']),
     order: z.number().default(0),
   }),
 });
@@ -94,4 +82,4 @@ const recursos = defineCollection({
   }),
 });
 
-export const collections = { blog, eventos, proyectos, equipo, tracks, recursos };
+export const collections = { blog, eventos, proyectos, equipo, recursos };

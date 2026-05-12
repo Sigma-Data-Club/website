@@ -1,6 +1,6 @@
 ---
 name: 'Nombre Apellidos'
-kind: 'junta' # 'junta' | 'track-lead' | 'mentor'
+kind: 'junta' # 'junta' | 'mentor'
 role: 'presidenta'
 bio: 'Frase corta describiendo a la persona.'
 grade: '4.º GIIC'

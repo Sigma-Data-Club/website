@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
 import SectionHead from '../components/SectionHead.astro';
 import PersonCard from '../components/PersonCard.astro';
-import TrackTable from '../components/TrackTable.astro';
 import { withBase } from '../lib/url';
 
 const all = await getCollection('equipo');
@@ -13,18 +12,17 @@ const junta = all
 const mentores = all
   .filter((p) => p.data.kind === 'mentor')
   .sort((a, b) => a.data.order - b.data.order);
-const tracks = (await getCollection('tracks')).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <PageLayout
   title="Equipo · Sigma Data Club"
   eyebrow="/ equipo"
   heading="Quién mantiene esto en marcha."
-  lead="La junta es rotativa: se renueva cada curso académico en asamblea abierta. Los <em>track leads</em> coordinan los grupos de trabajo. Cualquier socio puede proponerse para los dos roles."
+  lead="La junta es rotativa: se renueva cada curso académico en asamblea abierta. Cualquier socio puede proponerse."
 >
   <section>
     <div class="container">
-      <SectionHead eyebrow="Junta directiva" title="Curso 2025/26." num="01 / 03" />
+      <SectionHead eyebrow="Junta directiva" title="Curso 2025/26." num="01 / 02" />
       <div class="grid grid-3">
         {junta.map((p) => <PersonCard person={p} />)}
       </div>
@@ -33,17 +31,10 @@ const tracks = (await getCollection('tracks')).sort((a, b) => a.data.order - b.d
 
   <section>
     <div class="container">
-      <SectionHead eyebrow="Track leads" title="Coordinan los grupos de trabajo." num="02 / 03" />
-      <TrackTable tracks={tracks} />
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
       <SectionHead
         eyebrow="Mentores"
         title="Alumni que echan una mano y que nos inspiran."
-        num="03 / 03"
+        num="02 / 02"
       />
       <div class="grid grid-2">
         {mentores.map((p) => <PersonCard person={p} />)}
@@ -62,7 +53,7 @@ const tracks = (await getCollection('tracks')).sort((a, b) => a.data.order - b.d
             presentarse.
           </p>
         </div>
-        <a href={withBase('/unete')} class="btn btn-ghost">hazte socio primero</a>
+        <a href={withBase('/unete')} class="btn btn-ghost" style="background: var(--surface-2);">hazte socio primero</a>
       </div>
     </div>
   </section>

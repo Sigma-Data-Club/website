@@ -35,16 +35,15 @@ Initialization is an inline `<script is:inline>` in `BaseLayout`'s `<head>` so i
 
 ### Content collections
 
-Six collections, all defined in `src/content/config.ts` with Zod schemas. `_template.{md,mdx}` files in each folder are ignored (Astro skips files starting with `_`).
+Five collections, all defined in `src/content/config.ts` with Zod schemas. `_template.{md,mdx}` files in each folder are ignored (Astro skips files starting with `_`).
 
-| Collection  | Format | Body used? | Purpose                                              |
-| ----------- | ------ | ---------- | ---------------------------------------------------- |
-| `blog`      | MDX    | yes        | Blog posts                                           |
-| `eventos`   | md     | no         | Events (calendario + archivo)                        |
-| `proyectos` | md     | no         | Projects (destacados + archivo)                      |
-| `equipo`    | md     | no         | People — `kind: 'junta' \| 'track-lead' \| 'mentor'` |
-| `tracks`    | md     | no         | Track leads (table-shaped)                           |
-| `recursos`  | md     | no         | Curated learning resources                           |
+| Collection  | Format | Body used? | Purpose                                  |
+| ----------- | ------ | ---------- | ---------------------------------------- |
+| `blog`      | MDX    | yes        | Blog posts                               |
+| `eventos`   | md     | no         | Events (calendario + archivo)            |
+| `proyectos` | md     | no         | Projects (destacados + archivo)          |
+| `equipo`    | md     | no         | People — `kind: 'junta' \| 'mentor'`     |
+| `recursos`  | md     | no         | Curated learning resources               |
 
 Cross-references: `blog.authors` and `proyectos.contributors` use `reference('equipo')` for typed slug refs. (Note: Astro 4 only supports `.md` files inside collections marked `type: 'content'`; the schemas reflect that.)
 
