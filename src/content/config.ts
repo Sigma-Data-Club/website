@@ -74,7 +74,6 @@ const recursos = defineCollection({
       'datos & sql',
       'mlops & producción',
       'datasets',
-      'apuntes',
     ]),
     kind: z.enum(['curso', 'libro', 'paper', 'vídeo', 'guía', 'repo', 'dataset']),
     url: z.string().url().optional(),
