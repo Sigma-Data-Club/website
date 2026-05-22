@@ -7,7 +7,7 @@
 export const site = {
   name: "Sigma Data Club",
   shortName: "Sigma",
-  symbol: "Σ",
+  symbol: "σ",
   tagline: "Club de Ciencia de Datos",
   university: "Universidad", // ← pon aquí el nombre de tu universidad
   email: "hola@sigmadataclub.org",

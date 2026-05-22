@@ -25,7 +25,7 @@ export function Hero() {
           {hero.eyebrow} · {site.university}
         </p>
 
-        <h1 className="display mt-7 max-w-5xl text-[clamp(2.75rem,11vw,9rem)] leading-[0.84]">
+        <h1 className="display relative z-20 mt-7 max-w-5xl text-[clamp(2.75rem,11vw,9rem)] leading-[0.84]">
           {hero.headline.map((word, i) => (
             <span key={word} className="inline-block">
               {word}
@@ -34,35 +34,37 @@ export function Hero() {
           ))}
         </h1>
 
-        {/* Halo: la malla se disuelve a blanco bajo el texto, con bordes emplumados (sin caja) */}
-        <div className="relative mt-10 max-w-xl">
+        {/* El halo es el fondo del propio párrafo: centrado en el texto, sin caja.
+            Va por debajo del título (z-20). */}
+        <div className="relative mt-12 max-w-xl">
           <div
             aria-hidden
-            className="pointer-events-none absolute -inset-x-20 -inset-y-8 bg-[radial-gradient(92%_82%_at_50%_50%,var(--color-bg)_0%,var(--color-bg)_45%,rgba(255,255,255,0)_85%)]"
+            className="pointer-events-none absolute -inset-x-12 -inset-y-8 bg-[radial-gradient(96%_50%_at_50%_50%,var(--color-bg)_0%,var(--color-bg)_60%,rgba(255,255,255,0)_100%)]"
           />
-          <div className="relative z-10">
-            <p className="text-lg leading-relaxed text-ink sm:text-xl">{hero.intro}</p>
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <a
-                href={hero.primaryCta.href}
-                className="group inline-flex items-center justify-center gap-2 border border-ink bg-ink px-7 py-4 text-base font-semibold text-bg transition-colors duration-300 hover:border-accent hover:bg-accent"
-              >
-                {hero.primaryCta.label}
-                <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>
-                  →
-                </span>
-              </a>
-              <a
-                href={hero.secondaryCta.href}
-                className="group inline-flex items-center justify-center gap-2 border border-ink px-7 py-4 text-base font-semibold text-ink transition-colors duration-300 hover:bg-ink hover:text-bg"
-              >
-                {hero.secondaryCta.label}
-                <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>
-                  ↓
-                </span>
-              </a>
-            </div>
-          </div>
+          <p className="relative z-10 text-lg leading-relaxed text-ink sm:text-xl">
+            {hero.intro}
+          </p>
+        </div>
+
+        <div className="relative z-10 mt-8 flex max-w-xl flex-col gap-4 sm:flex-row sm:items-center">
+          <a
+            href={hero.primaryCta.href}
+            className="group inline-flex items-center justify-center gap-2 border border-ink bg-ink px-7 py-4 text-base font-semibold text-bg transition-colors duration-300 hover:border-accent hover:bg-accent"
+          >
+            {hero.primaryCta.label}
+            <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>
+              →
+            </span>
+          </a>
+          <a
+            href={hero.secondaryCta.href}
+            className="group inline-flex items-center justify-center gap-2 border border-ink px-7 py-4 text-base font-semibold text-ink transition-colors duration-300 hover:bg-ink hover:text-bg"
+          >
+            {hero.secondaryCta.label}
+            <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>
+              ↓
+            </span>
+          </a>
         </div>
       </div>
 

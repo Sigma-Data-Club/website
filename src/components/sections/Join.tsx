@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { join, site } from "@/content/site";
 import { SectionHeader } from "../SectionHeader";
+import { JoinCloudCanvas } from "../three/JoinCloudCanvas";
 
 export function Join() {
   const [interest, setInterest] = useState<string | null>(null);
@@ -15,16 +16,28 @@ export function Join() {
   }
 
   return (
-    <section id="unete" className="shell scroll-mt-24 py-24 md:py-36">
-      <SectionHeader number={join.number} label={join.label} />
+    <section id="unete" className="scroll-mt-24 py-24 md:py-32">
+      <div className="shell">
+        <SectionHeader number={join.number} label={join.label} />
 
-      <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-20">
-        {/* Lado izquierdo: invitación */}
-        <div className="flex flex-col">
-          <h2 className="display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9]">
+        {/* Escenario: la σ del club emerge de los datos (respira casi formada).
+            El título se superpone abajo, sobre el desvanecido, como en el hero. */}
+        <div className="relative mt-10 flex min-h-[48vh] items-end overflow-hidden md:mt-12">
+          <div className="pointer-events-none absolute inset-0" aria-hidden>
+            <JoinCloudCanvas />
+            {/* Solo difuminamos la base (para el título); el resto de la σ
+                queda limpia para que se reconozca el trazo superior. */}
+            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-bg via-bg/85 to-transparent" />
+          </div>
+          <h2 className="display relative max-w-2xl text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9]">
             {join.title}
           </h2>
-          <p className="mt-8 max-w-md text-lg leading-relaxed text-ink/70">
+        </div>
+
+        <div className="mt-14 grid gap-12 lg:grid-cols-2 lg:gap-20">
+          {/* Lado izquierdo: invitación */}
+          <div className="flex flex-col">
+          <p className="max-w-md text-lg leading-relaxed text-ink/70">
             {join.body}
           </p>
           <div className="mt-auto pt-12">
@@ -126,6 +139,7 @@ export function Join() {
               </button>
             </form>
           )}
+          </div>
         </div>
       </div>
     </section>
