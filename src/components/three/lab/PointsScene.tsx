@@ -52,6 +52,7 @@ function Cloud({ reduced }: { reduced: boolean }) {
       uMorph: { value: reduced ? 1 : 0 },
       uDpr: { value: Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, 2) },
       uPointer: { value: new THREE.Vector2(0, 0) },
+      uPointerStrength: { value: 1.0 },
       uInk: { value: new THREE.Color(INK_HEX) },
       uAccent: { value: new THREE.Color(ACCENT_HEX) },
     };

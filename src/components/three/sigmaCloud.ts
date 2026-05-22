@@ -60,6 +60,7 @@ export const cloudVertexShader = /* glsl */ `
   uniform float uMorph;
   uniform float uDpr;
   uniform vec2 uPointer;
+  uniform float uPointerStrength;
   attribute vec3 aScatter;
   attribute vec3 aGlyph;
   attribute float aSize;
@@ -79,10 +80,10 @@ export const cloudVertexShader = /* glsl */ `
     pos.y += snoise(vec3(aScatter.yx * 0.35, uTime * 0.18 + 11.0)) * 0.55 * wob;
     pos.z += snoise(vec3(aScatter.xy * 0.30, uTime * 0.14 + 5.0)) * 0.7 * wob;
 
-    // Repulsión suave alrededor del cursor (en plano XY del mundo).
+    // Repulsión suave alrededor del cursor (en espacio local del objeto).
     vec2 d = pos.xy - uPointer;
     float dist = length(d);
-    float push = smoothstep(1.7, 0.0, dist) * 0.7;
+    float push = smoothstep(1.7, 0.0, dist) * 0.7 * uPointerStrength;
     pos.xy += normalize(d + vec2(0.0001)) * push;
 
     vec4 mv = modelViewMatrix * vec4(pos, 1.0);

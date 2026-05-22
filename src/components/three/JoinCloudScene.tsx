@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import type { ShaderMaterial } from "three";
 import { ACCENT_HEX, INK_HEX, prefersReducedMotion } from "./glsl";
@@ -48,12 +48,25 @@ function Cloud({ reduced }: { reduced: boolean }) {
       uTime: { value: 0 },
       uMorph: { value: 1 },
       uDpr: { value: Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, 2) },
-      uPointer: { value: new THREE.Vector2(0, 0) },
+      // Lejos al inicio (sin empuje) hasta que el cursor entre en escena.
+      uPointer: { value: new THREE.Vector2(0, -999) },
+      uPointerStrength: { value: 2.6 }, // DEBUG: alto para confirmar
       uInk: { value: new THREE.Color(INK_HEX) },
       uAccent: { value: new THREE.Color(ACCENT_HEX) },
     };
 
     return { aScatter, aGlyph, aSize, aAccent, uniforms: u };
+  }, []);
+
+  // El lienzo es pointer-events-none (el formulario manda), así que el cursor
+  // se escucha a nivel de ventana y se proyecta al mundo.
+  const mouse = useRef<{ x: number; y: number } | null>(null);
+  useEffect(() => {
+    const onMove = (e: PointerEvent) => {
+      mouse.current = { x: e.clientX, y: e.clientY };
+    };
+    window.addEventListener("pointermove", onMove, { passive: true });
+    return () => window.removeEventListener("pointermove", onMove);
   }, []);
 
   useFrame((state) => {
@@ -64,6 +77,18 @@ function Cloud({ reduced }: { reduced: boolean }) {
     // Respira muy sutil entre ~0.93 y 1: la σ se mantiene nítida y reconocible.
     const wave = Math.sin(t * 0.5) * 0.5 + 0.5;
     mat.uniforms.uMorph.value = 0.93 + 0.07 * wave;
+
+    // Proyecta el cursor al espacio local de la nube y la repele con suavidad.
+    if (mouse.current) {
+      const rect = state.gl.domElement.getBoundingClientRect();
+      const nx = ((mouse.current.x - rect.left) / rect.width) * 2 - 1;
+      const ny = -(((mouse.current.y - rect.top) / rect.height) * 2 - 1);
+      const tx = (nx * state.viewport.width) / 2;
+      const ty = (ny * state.viewport.height) / 2 - 0.85; // resta el offset del grupo
+      const p = mat.uniforms.uPointer.value as THREE.Vector2;
+      p.x += (tx - p.x) * 0.1;
+      p.y += (ty - p.y) * 0.1;
+    }
   });
 
   return (
