@@ -1,71 +1,73 @@
 import { hero, site } from "@/content/site";
-import { Hero3D } from "./three/Hero3D";
+import { SurfaceCanvas } from "./three/SurfaceCanvas";
 
 export function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden pt-[72px]"
+      className="relative flex min-h-screen flex-col overflow-hidden pt-[72px]"
     >
-      {/* Escena 3D — ocupa el lateral derecho en desktop, el fondo en móvil */}
-      <div className="pointer-events-none absolute inset-0 lg:left-[35%]" aria-hidden>
-        <Hero3D />
+      {/* Escena 3D — superficie ondulada que recede como un paisaje de datos */}
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <SurfaceCanvas />
       </div>
 
-      {/* Velo degradado: garantiza la legibilidad del texto sobre la escena */}
+      {/* Velo: blanco arriba (texto) → transparente abajo (malla visible) */}
       <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-bg/70 via-transparent to-bg lg:bg-gradient-to-r lg:from-bg lg:via-bg/30 lg:to-transparent"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-bg via-bg/70 to-transparent"
         aria-hidden
       />
 
       {/* Contenido */}
-      <div className="shell relative z-10 w-full">
-        <div className="max-w-4xl">
-          <p className="kicker flex items-center gap-3 text-ink/60">
-            <span className="inline-block h-2 w-2 bg-accent" />
-            {hero.eyebrow} · {site.university}
-          </p>
+      <div className="shell relative z-10 flex w-full flex-1 flex-col justify-start pt-12 md:pt-20">
+        <p className="kicker flex items-center gap-3 text-ink/60">
+          <span className="inline-block h-2 w-2 bg-accent" />
+          {hero.eyebrow} · {site.university}
+        </p>
 
-          <h1 className="display mt-7 text-[clamp(3rem,12vw,9.5rem)] leading-[0.86]">
-            {hero.headline.map((line, i) => (
-              <span key={line} className="block">
-                {line}
-                {i === hero.headline.length - 1 ? (
-                  <span className="text-accent">.</span>
-                ) : null}
-              </span>
-            ))}
-          </h1>
+        <h1 className="display mt-7 max-w-5xl text-[clamp(2.75rem,11vw,9rem)] leading-[0.84]">
+          {hero.headline.map((word, i) => (
+            <span key={word} className="inline-block">
+              {word}
+              {i === hero.headline.length - 1 ? <span className="text-accent">.</span> : null}{" "}
+            </span>
+          ))}
+        </h1>
 
-          <p className="mt-8 max-w-xl text-lg leading-relaxed text-ink/70 sm:text-xl">
-            {hero.intro}
-          </p>
-
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-            <a
-              href={hero.primaryCta.href}
-              className="group inline-flex items-center justify-center gap-2 border border-ink bg-ink px-7 py-4 text-base font-semibold text-bg transition-colors duration-300 hover:border-accent hover:bg-accent"
-            >
-              {hero.primaryCta.label}
-              <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>
-                →
-              </span>
-            </a>
-            <a
-              href={hero.secondaryCta.href}
-              className="group inline-flex items-center justify-center gap-2 border border-ink px-7 py-4 text-base font-semibold text-ink transition-colors duration-300 hover:bg-ink hover:text-bg"
-            >
-              {hero.secondaryCta.label}
-              <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>
-                ↓
-              </span>
-            </a>
+        {/* Halo: la malla se disuelve a blanco bajo el texto, con bordes emplumados (sin caja) */}
+        <div className="relative mt-10 max-w-xl">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -inset-x-20 -inset-y-8 bg-[radial-gradient(92%_82%_at_50%_50%,var(--color-bg)_0%,var(--color-bg)_45%,rgba(255,255,255,0)_85%)]"
+          />
+          <div className="relative z-10">
+            <p className="text-lg leading-relaxed text-ink sm:text-xl">{hero.intro}</p>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+              <a
+                href={hero.primaryCta.href}
+                className="group inline-flex items-center justify-center gap-2 border border-ink bg-ink px-7 py-4 text-base font-semibold text-bg transition-colors duration-300 hover:border-accent hover:bg-accent"
+              >
+                {hero.primaryCta.label}
+                <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>
+                  →
+                </span>
+              </a>
+              <a
+                href={hero.secondaryCta.href}
+                className="group inline-flex items-center justify-center gap-2 border border-ink px-7 py-4 text-base font-semibold text-ink transition-colors duration-300 hover:bg-ink hover:text-bg"
+              >
+                {hero.secondaryCta.label}
+                <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>
+                  ↓
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Pie del hero: indicador de scroll */}
-      <div className="shell relative z-10 mt-16 flex items-center justify-between pb-10">
+      <div className="shell relative z-10 mt-12 flex items-center justify-between pb-10">
         <a
           href="#club"
           className="flex items-center gap-3 text-sm font-medium text-ink/50 transition-colors hover:text-ink"
