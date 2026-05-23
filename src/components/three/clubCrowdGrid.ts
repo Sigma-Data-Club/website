@@ -1,12 +1,17 @@
 import * as THREE from "three";
+import { ACCENT_HEX, INK_HEX } from "./glsl";
 import { mulberry32 } from "./lab/random";
 
 const SEED = 0x7e_71_70_6f;
 
+const GRADIENT_ACCENT = new THREE.Color(ACCENT_HEX);
+const GRADIENT_DARK = new THREE.Color(ACCENT_HEX).lerp(new THREE.Color(INK_HEX), 0.9);
+
 export type CrowdLayout = {
   xz: Float32Array;
   baseRot: Float32Array;
-  accent: Float32Array;
+  /** RGB por instancia, muestreado aleatoriamente en el gradiente acento → oscuro. */
+  colors: Float32Array;
   phase: Float32Array;
   placeRank: Uint16Array;
   cols: number;
@@ -14,6 +19,20 @@ export type CrowdLayout = {
   gap: number;
   figureScale: number;
 };
+
+/** t ∈ [0,1]: 0 = acento, 1 = mezcla acento–negro. */
+export function colorOnCrowdGradient(t: number, out = new THREE.Color()) {
+  return out.copy(GRADIENT_ACCENT).lerp(GRADIENT_DARK, THREE.MathUtils.clamp(t, 0, 1));
+}
+
+function randomGradientStop(rand: () => number, col: number, row: number, cols: number, rows: number) {
+  const nx = cols > 1 ? col / (cols - 1) : 0.5;
+  const nz = rows > 1 ? row / (rows - 1) : 0.5;
+  const spatial = nx * 0.38 + nz * 0.22;
+  const t = THREE.MathUtils.clamp(Math.pow(rand(), 0.8) * 0.55 + spatial * 0.45 + rand() * 0.12, 0, 1);
+  const c = colorOnCrowdGradient(t);
+  return [c.r, c.g, c.b] as const;
+}
 
 /**
  * Cuadrícula centrada que ocupa el ancho visible del canvas (viewport R3F).
@@ -40,7 +59,7 @@ export function buildGridLayout(count: number, viewportW: number, viewportH: num
 
   const xz = new Float32Array(count * 2);
   const baseRot = new Float32Array(count);
-  const accent = new Float32Array(count);
+  const colors = new Float32Array(count * 3);
   const phase = new Float32Array(count);
   const placeRank = new Uint16Array(count);
 
@@ -50,12 +69,15 @@ export function buildGridLayout(count: number, viewportW: number, viewportH: num
     xz[i * 2] = col * gap - halfX;
     xz[i * 2 + 1] = row * gap - halfZ;
     baseRot[i] = (rand() - 0.5) * 0.12;
-    accent[i] = rand() < 0.14 ? 1 : 0;
+    const [r, g, b] = randomGradientStop(rand, col, row, cols, rows);
+    colors[i * 3] = r;
+    colors[i * 3 + 1] = g;
+    colors[i * 3 + 2] = b;
     phase[i] = rand() * Math.PI * 2;
     placeRank[i] = i;
   }
 
-  return { xz, baseRot, accent, phase, placeRank, cols, rows, gap, figureScale };
+  return { xz, baseRot, colors, phase, placeRank, cols, rows, gap, figureScale };
 }
 
 export function gridCameraDistance(layout: Pick<CrowdLayout, "rows" | "gap">) {

@@ -5,14 +5,7 @@ import { useLayoutEffect, useMemo, useRef, useState, type RefObject } from "reac
 import * as THREE from "three";
 import { team } from "@/content/site";
 import { buildGridLayout, gridCameraDistance, type CrowdLayout } from "./clubCrowdGrid";
-import { ACCENT_HEX, BG_HEX, INK_HEX, prefersReducedMotion } from "./glsl";
-
-/** Dos tonos del club con luminosidad parecida (evita negros en sombra). */
-function crowdTones() {
-  const bright = new THREE.Color(ACCENT_HEX).lerp(new THREE.Color("#ffffff"), 0.1);
-  const soft = new THREE.Color(ACCENT_HEX).lerp(new THREE.Color(INK_HEX), 0.48);
-  return { bright, soft };
-}
+import { ACCENT_HEX, BG_HEX, prefersReducedMotion } from "./glsl";
 
 const N = team.memberCount;
 const DROP_HEIGHT = 2.8;
@@ -55,8 +48,8 @@ function ClubCrowd({
   const headRef = useRef<THREE.InstancedMesh>(null);
   const dummy = useMemo(() => new THREE.Object3D(), []);
   const hidden = useMemo(() => new THREE.Vector3(0, -999, 0), []);
-  const tones = useMemo(() => crowdTones(), []);
   const color = useMemo(() => new THREE.Color(), []);
+  const highlight = useMemo(() => new THREE.Color(ACCENT_HEX), []);
   const pointerWorld = useRef(new THREE.Vector2(99, 99));
   const smoothScroll = useRef(reduced ? 1 : 0);
   const { pointer, viewport } = useThree();
@@ -120,8 +113,9 @@ function ClubCrowd({
       const tint = allPlaced
         ? THREE.MathUtils.clamp(ripple * 1.4 + wave * 2.5, 0, 1)
         : THREE.MathUtils.clamp(placed * 0.25, 0, 1);
-      const base = layout.accent[i] > 0.5 ? tones.bright : tones.soft;
-      color.copy(base).lerp(tones.bright, tint * 0.45);
+      const ci = i * 3;
+      color.setRGB(layout.colors[ci], layout.colors[ci + 1], layout.colors[ci + 2]);
+      if (tint > 0) color.lerp(highlight, tint * 0.4);
       bodyMesh.setColorAt(i, color);
       headMesh.setColorAt(i, color);
     }
