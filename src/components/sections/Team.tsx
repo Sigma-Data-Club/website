@@ -16,10 +16,10 @@ export function Team() {
     <section id="equipo" className="scroll-mt-24 bg-paper pb-24 md:pb-36">
       <TeamCrowdStage />
 
-      <div className="shell pt-16 md:pt-20">
+      <div className="shell border-t border-line pt-10 md:pt-12">
         <p className="kicker text-ink/50">Dirección del club</p>
 
-        <div className="mt-8 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
           {team.members.map((member, i) => (
             <Reveal
               key={`${member.role}-${i}`}

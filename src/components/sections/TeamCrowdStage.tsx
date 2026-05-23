@@ -16,14 +16,15 @@ function clamp01(n: number) {
  */
 export function TeamCrowdStage() {
   const trackRef = useRef<HTMLDivElement>(null);
-  const progressRef = useRef(prefersReducedMotion() ? 1 : 0);
-  const [placedCount, setPlacedCount] = useState(0);
+  const reducedMotion = prefersReducedMotion();
+  const progressRef = useRef(reducedMotion ? 1 : 0);
+  const [placedCount, setPlacedCount] = useState(reducedMotion ? team.memberCount : 0);
 
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
 
-    if (prefersReducedMotion()) {
+    if (reducedMotion) {
       progressRef.current = 1;
       setPlacedCount(team.memberCount);
       return;
@@ -51,11 +52,20 @@ export function TeamCrowdStage() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [reducedMotion]);
 
   return (
-    <div ref={trackRef} className="relative h-[200vh] md:h-[240vh]">
-      <div className="sticky top-0 z-0 min-h-svh overflow-hidden">
+    <div
+      ref={trackRef}
+      className={reducedMotion ? "relative" : "relative h-[145vh] md:h-[165vh]"}
+    >
+      <div
+        className={
+          reducedMotion
+            ? "relative min-h-[72vh] overflow-hidden md:min-h-[76vh]"
+            : "sticky top-0 z-0 min-h-svh overflow-hidden"
+        }
+      >
         {/* Canvas a pantalla completa: recibe hover y pointer */}
         <div className="absolute inset-0 z-0">
           <ClubCrowdCanvas scrollProgressRef={progressRef} />
