@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@/components/three/fiber";
 import { useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import type { ShaderMaterial } from "three";

@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame } from "@/components/three/fiber";
 import { useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { ACCENT_HEX, INK_HEX, prefersReducedMotion } from "../glsl";

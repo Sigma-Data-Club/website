@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas, useThree } from "@/components/three/fiber";
 import { useEffect, useState } from "react";
 import { getProjectVisual } from "@/content/projectVisuals";
 import { prefersReducedMotion } from "./glsl";

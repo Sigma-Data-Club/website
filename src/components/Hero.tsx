@@ -39,7 +39,7 @@ export function Hero() {
         <div className="relative mt-12 max-w-xl">
           <div
             aria-hidden
-            className="pointer-events-none absolute -inset-x-12 -inset-y-8 bg-[radial-gradient(96%_50%_at_50%_50%,var(--color-bg)_0%,var(--color-bg)_60%,rgba(255,255,255,0)_100%)]"
+            className="pointer-events-none absolute -inset-x-4 -inset-y-8 bg-[radial-gradient(65%_50%_at_50%_50%,var(--color-bg)_0%,var(--color-bg)_60%,rgba(255,255,255,0)_100%)]"
           />
           <p className="relative z-10 text-lg leading-relaxed text-ink sm:text-xl">
             {hero.intro}

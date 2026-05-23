@@ -1,6 +1,6 @@
 "use client";
 
-import { useFrame } from "@react-three/fiber";
+import { useFrame } from "@/components/three/fiber";
 import { useLayoutEffect, useMemo, useRef, type ReactElement } from "react";
 import * as THREE from "three";
 import type { ProjectVisualId } from "@/content/projectVisuals";
