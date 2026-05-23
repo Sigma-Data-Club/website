@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { CheckGlyph } from "@/components/GlyphIcons";
 import { join, site } from "@/content/site";
 import { SectionHeader } from "../SectionHeader";
 import { JoinCloudCanvas } from "../three/JoinCloudCanvas";
@@ -55,8 +56,8 @@ export function Join() {
         <div className="border border-ink p-7 md:p-10">
           {submitted ? (
             <div className="flex h-full min-h-[320px] flex-col items-start justify-center">
-              <span className="flex h-12 w-12 items-center justify-center bg-accent text-2xl text-bg">
-                ✓
+              <span className="flex h-12 w-12 items-center justify-center bg-accent text-bg">
+                <CheckGlyph className="size-6" />
               </span>
               <h3 className="display mt-6 text-3xl">¡Estás dentro!</h3>
               <p className="mt-3 max-w-sm text-ink/70">

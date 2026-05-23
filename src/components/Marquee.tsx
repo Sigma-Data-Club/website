@@ -1,3 +1,4 @@
+import { AsteriskGlyph } from "@/components/GlyphIcons";
 import { marquee } from "@/content/site";
 
 /**
@@ -18,7 +19,12 @@ export function Marquee() {
             aria-hidden={i >= marquee.length}
           >
             {word}
-            <span className="ml-8 text-accent">✳</span>
+            <span
+              className="ml-8 inline-flex shrink-0 items-center text-accent"
+              aria-hidden
+            >
+              <AsteriskGlyph className="size-[0.7em]" />
+            </span>
           </span>
         ))}
       </div>
