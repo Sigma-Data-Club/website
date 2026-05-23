@@ -248,7 +248,7 @@ export const team = {
       {
         name: "Ernesto Martínez Gómez",
         role: "alumni · cofundador · 2024",
-        bio: "Cofundador de Sigma Data Club. Actualmente CDO en Eaship; próximamente en Revolut.",
+        bio: "Cofundador de Sigma Data Club. Actualmente CDO en Eaship.",
         image: "/sigma-characters-images/ernesto-m.png",
         linkedin: "https://www.linkedin.com/in/ernestomg",
       },
