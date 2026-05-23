@@ -195,7 +195,7 @@ export function ClubCrowdScene({
       dpr={[1, 1.75]}
       frameloop={reduced ? "demand" : "always"}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-      style={{ background: "transparent", width: "100%", height: "100%", touchAction: "none" }}
+      style={{ background: "transparent", width: "100%", height: "100%", touchAction: "pan-y" }}
     >
       <ambientLight intensity={1.1} />
       <hemisphereLight args={["#dff5f5", BG_HEX, 0.95]} />

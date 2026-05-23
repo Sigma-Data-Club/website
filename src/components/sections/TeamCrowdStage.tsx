@@ -62,7 +62,10 @@ export function TeamCrowdStage() {
             : "sticky top-0 z-0 min-h-svh overflow-hidden"
         }
       >
-        <div className="absolute inset-0 z-0">
+        <div
+          className="absolute inset-0 z-0 pointer-events-none [@media(hover:hover)_and_(pointer:fine)]:pointer-events-auto"
+          aria-hidden
+        >
           <ClubCrowdCanvas scrollProgressRef={progressRef} />
         </div>
 
