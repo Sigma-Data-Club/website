@@ -40,18 +40,24 @@ export function TeamMemberCard({
         onMouseLeave={onLeave}
       >
         {member.image ? (
-          <div
-            className="pointer-events-none absolute right-0 bottom-0 z-0 h-[11rem] w-[58%] min-w-[5.5rem] max-w-44 transition-transform duration-300 group-hover:scale-[1.02] md:h-[12.5rem] md:max-w-52"
-            aria-hidden
-          >
-            <Image
-              src={member.image}
-              alt=""
-              fill
-              sizes="(max-width: 768px) 160px, 200px"
-              className="object-contain object-bottom"
+          <>
+            <div
+              className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-bg from-30% via-bg/95 via-50% to-transparent to-[68%] transition-[background] duration-300 group-hover:from-ink group-hover:via-ink/95"
+              aria-hidden
             />
-          </div>
+            <div
+              className="pointer-events-none absolute right-0 bottom-0 z-0 h-[11rem] w-[58%] min-w-[5.5rem] max-w-44 transition-transform duration-300 group-hover:scale-[1.02] md:h-[12.5rem] md:max-w-52"
+              aria-hidden
+            >
+              <Image
+                src={member.image}
+                alt=""
+                fill
+                sizes="(max-width: 768px) 160px, 200px"
+                className="object-contain object-bottom"
+              />
+            </div>
+          </>
         ) : null}
 
         <CardHoverParticles active={hovered} seed={index} />
@@ -67,7 +73,7 @@ export function TeamMemberCard({
               {num}
             </span>
             <span
-              className={`text-[10px] font-semibold uppercase tracking-widest transition-colors duration-300 ${
+              className={`relative text-[10px] font-semibold uppercase tracking-widest transition-colors duration-300 [text-shadow:0_0_14px_var(--color-bg),0_1px_2px_var(--color-bg)] group-hover:[text-shadow:0_0_14px_var(--color-ink),0_1px_2px_var(--color-ink)] ${
                 hovered ? "text-accent" : "text-ink/30"
               }`}
             >
@@ -75,15 +81,17 @@ export function TeamMemberCard({
             </span>
           </div>
 
-          <h3 className="display mt-3 text-lg leading-tight md:text-xl">{member.name}</h3>
-          <p className="mt-1 text-xs font-medium uppercase tracking-wide text-accent transition-colors duration-300 group-hover:text-bg/80">
-            {member.role}
-          </p>
-          {member.bio ? (
-            <p className="mt-2 text-sm leading-relaxed text-ink/65 transition-colors duration-300 group-hover:text-bg/70">
-              {member.bio}
+          <div className={member.image ? "max-w-[72%]" : undefined}>
+            <h3 className="display mt-3 text-lg leading-tight md:text-xl">{member.name}</h3>
+            <p className="mt-1 text-xs font-medium uppercase tracking-wide text-accent transition-colors duration-300 group-hover:text-bg/80">
+              {member.role}
             </p>
-          ) : null}
+            {member.bio ? (
+              <p className="mt-2 text-sm leading-relaxed text-ink/65 transition-colors duration-300 group-hover:text-bg/70">
+                {member.bio}
+              </p>
+            ) : null}
+          </div>
         </div>
       </a>
     </Reveal>

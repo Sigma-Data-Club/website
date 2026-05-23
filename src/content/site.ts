@@ -185,6 +185,7 @@ export const team = {
       {
         name: "Sergio Ortiz",
         role: "vicepresidente · coordinador",
+        image: "/sigma-characters-images/sergio-o.png",
         linkedin: "https://www.linkedin.com/in/sergio-ortiz",
       },
       {
@@ -195,26 +196,31 @@ export const team = {
       {
         name: "Pablo Gandía",
         role: "miembro junta",
+        image: "/sigma-characters-images/pablog-gandia.png",
         linkedin: "https://www.linkedin.com/in/pablo-gandia",
       },
       {
         name: "Nouh Khouyi",
         role: "miembro junta",
+        image: "/sigma-characters-images/nouh-k.png",
         linkedin: "https://www.linkedin.com/in/nouh-khouyi",
       },
       {
         name: "Carlota Gui",
         role: "miembro junta",
+        image: "/sigma-characters-images/carlota-g.png",
         linkedin: "https://www.linkedin.com/in/carlota-gui",
       },
       {
         name: "Pablo Gil Martínez",
         role: "miembro junta",
+        image: "/sigma-characters-images/pablo-gil.png",
         linkedin: "https://www.linkedin.com/in/pablo-gil-martinez",
       },
       {
         name: "Adria Aguilar",
         role: "miembro junta",
+        image: "/sigma-characters-images/adria-a.png",
         linkedin: "https://www.linkedin.com/in/adria-aguilar",
       },
     ],
