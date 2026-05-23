@@ -53,9 +53,9 @@ export function ProjectCard({
   const num = String(index + 1).padStart(2, "0");
 
   return (
-    <Reveal delay={delay}>
+    <Reveal delay={delay} className="h-full">
       <article
-        className="group flex flex-col bg-bg transition-colors duration-300 hover:bg-ink hover:text-bg"
+        className="group flex h-full flex-col bg-bg transition-colors duration-300 hover:bg-ink hover:text-bg"
         style={
           hovered
             ? {
@@ -93,16 +93,17 @@ export function ProjectCard({
         >
           {num}
         </span>
-        <span className="absolute right-4 top-4 z-10 h-3 w-3 bg-accent" aria-hidden />
       </div>
 
       <div className="flex flex-1 flex-col p-6">
         <span className="kicker text-accent">{project.area}</span>
-        <h3 className="display mt-4 text-2xl leading-tight">{project.title}</h3>
-        <p className="mt-3 flex-1 text-ink/65 transition-colors duration-300 group-hover:text-bg/70">
+        <h3 className="display mt-4 line-clamp-2 min-h-[2.5lh] text-2xl leading-tight">
+          {project.title}
+        </h3>
+        <p className="mt-3 line-clamp-3 min-h-[3lh] flex-1 text-ink/65 transition-colors duration-300 group-hover:text-bg/70">
           {project.desc}
         </p>
-        <ul className="mt-6 flex flex-wrap gap-2">
+        <ul className="mt-6 flex min-h-[1.75rem] flex-wrap content-start gap-2">
           {project.tags.map((tag) => (
             <li
               key={tag}
