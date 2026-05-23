@@ -17,9 +17,9 @@ function smoothstep(edge0: number, edge1: number, x: number) {
 
 function placedAmount(scrollProgress: number, rank: number) {
   const slot = rank / Math.max(N - 1, 1);
-  const window = 0.09;
-  const start = slot * (1 - window);
-  return smoothstep(0, 1, (scrollProgress - start) / window);
+  const fade = 0.09;
+  const start = slot * (1 - fade);
+  return smoothstep(0, 1, (scrollProgress - start) / fade);
 }
 
 function GridCamera({ layout }: { layout: CrowdLayout }) {

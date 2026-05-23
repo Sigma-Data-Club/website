@@ -10,17 +10,11 @@ function clamp01(n: number) {
   return Math.min(1, Math.max(0, n));
 }
 
-/**
- * Bloque sticky: al hacer scroll en la página, el progreso 0→1
- * va colocando miembros en la formación 3D.
- */
 export function TeamCrowdStage() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [reducedMotion] = useState(prefersReducedMotion);
   const progressRef = useRef(reducedMotion ? 1 : 0);
-  const [placedCount, setPlacedCount] = useState(() =>
-    reducedMotion ? team.memberCount : 0,
-  );
+  const [placedCount, setPlacedCount] = useState(reducedMotion ? team.memberCount : 0);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -68,12 +62,10 @@ export function TeamCrowdStage() {
             : "sticky top-0 z-0 min-h-svh overflow-hidden"
         }
       >
-        {/* Canvas a pantalla completa: recibe hover y pointer */}
         <div className="absolute inset-0 z-0">
           <ClubCrowdCanvas scrollProgressRef={progressRef} />
         </div>
 
-        {/* Velos legibles: no interceptan el ratón */}
         <div
           className="pointer-events-none absolute inset-x-0 top-0 z-10 h-48 bg-linear-to-b from-paper via-paper/75 to-transparent md:h-56"
           aria-hidden
@@ -83,7 +75,6 @@ export function TeamCrowdStage() {
           aria-hidden
         />
 
-        {/* Título + métricas arriba (no tapa la cuadrícula ni el cursor) */}
         <div className="shell pointer-events-none relative z-20 pt-6 md:pt-10">
           <SectionHeader
             number={team.number}

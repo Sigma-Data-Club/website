@@ -166,7 +166,6 @@ export const team = {
   number: "04",
   label: "Equipo",
   title: "Quién mueve el club",
-  /** Miembros activos del club (la multitud 3D usa este número). */
   memberCount: 162,
   crowd: {
     kicker: "La comunidad",

@@ -10,7 +10,6 @@ const GRADIENT_DARK = new THREE.Color(ACCENT_HEX).lerp(new THREE.Color(INK_HEX),
 export type CrowdLayout = {
   xz: Float32Array;
   baseRot: Float32Array;
-  /** RGB por instancia, muestreado aleatoriamente en el gradiente acento → oscuro. */
   colors: Float32Array;
   phase: Float32Array;
   placeRank: Uint16Array;
@@ -20,8 +19,7 @@ export type CrowdLayout = {
   figureScale: number;
 };
 
-/** t ∈ [0,1]: 0 = acento, 1 = mezcla acento–negro. */
-export function colorOnCrowdGradient(t: number, out = new THREE.Color()) {
+function colorOnCrowdGradient(t: number, out = new THREE.Color()) {
   return out.copy(GRADIENT_ACCENT).lerp(GRADIENT_DARK, THREE.MathUtils.clamp(t, 0, 1));
 }
 
@@ -34,10 +32,6 @@ function randomGradientStop(rand: () => number, col: number, row: number, cols: 
   return [c.r, c.g, c.b] as const;
 }
 
-/**
- * Cuadrícula centrada que ocupa el ancho visible del canvas (viewport R3F).
- * El número de columnas crece en pantallas anchas.
- */
 export function buildGridLayout(count: number, viewportW: number, viewportH: number): CrowdLayout {
   const rand = mulberry32(SEED);
   const aspect = viewportW / Math.max(viewportH, 0.001);
