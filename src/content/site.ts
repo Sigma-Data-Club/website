@@ -256,21 +256,191 @@ export const team = {
   },
 };
 
+const resourceCategories = [
+  {
+    title: "fundamentos",
+    items: [
+      {
+        kind: "curso",
+        title: "CS50P · Introduction to Programming with Python",
+        subtitle: "David Malan, Harvard",
+        href: "https://cs50.harvard.edu/python/",
+      },
+      {
+        kind: "libro",
+        title: "Python for Data Analysis (3.ª ed.)",
+        subtitle: "Wes McKinney",
+        href: "https://wesmckinney.com/book/",
+      },
+      {
+        kind: "curso",
+        title: "Statistical Learning with Python",
+        subtitle: "Hastie & Tibshirani, Stanford Online",
+        href: "https://www.statlearning.com/",
+      },
+      {
+        kind: "vídeo",
+        title: "3Blue1Brown · Essence of Linear Algebra",
+        subtitle: "Para refrescar antes de retomar deep learning",
+        href: "https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab",
+      },
+    ],
+  },
+  {
+    title: "machine learning",
+    items: [
+      {
+        kind: "libro",
+        title: "Hands-On Machine Learning (3.ª ed.)",
+        subtitle: "Aurélien Géron · libro de referencia del club",
+        href: "https://www.oreilly.com/library/view/hands-on-machine-learning/9781098125967/",
+      },
+      {
+        kind: "curso",
+        title: "Practical Deep Learning for Coders",
+        subtitle: "fast.ai · Jeremy Howard",
+        href: "https://course.fast.ai/",
+      },
+      {
+        kind: "curso",
+        title: "CS231n · CNNs for Visual Recognition",
+        subtitle: "Stanford",
+        href: "http://cs231n.stanford.edu/",
+      },
+      {
+        kind: "paper",
+        title: "Attention Is All You Need (anotado)",
+        subtitle: "Vaswani et al. · versión comentada por el club",
+        href: "https://arxiv.org/abs/1706.03762",
+      },
+    ],
+  },
+  {
+    title: "nlp y llms",
+    items: [
+      {
+        kind: "curso",
+        title: "CS224n · NLP with Deep Learning",
+        subtitle: "Stanford · imprescindible",
+        href: "https://web.stanford.edu/class/cs224n/",
+      },
+      {
+        kind: "curso",
+        title: "Hugging Face NLP course",
+        subtitle: "Gratis · práctico",
+        href: "https://huggingface.co/learn/nlp-course",
+      },
+      {
+        kind: "guía",
+        title: "Build a Large Language Model (from scratch)",
+        subtitle: "Sebastian Raschka",
+        href: "https://www.manning.com/books/build-a-large-language-model-from-scratch",
+      },
+      {
+        kind: "repo",
+        title: "karpathy/nanoGPT",
+        subtitle: "GPT educativo, <500 líneas",
+        href: "https://github.com/karpathy/nanoGPT",
+      },
+    ],
+  },
+  {
+    title: "datos & sql",
+    items: [
+      {
+        kind: "libro",
+        title: "Designing Data-Intensive Applications",
+        subtitle: "Martin Kleppmann · clásico de sistemas de datos",
+        href: "https://dataintensive.net/",
+      },
+      {
+        kind: "curso",
+        title: "CMU 15-445 · Database Systems",
+        subtitle: "Andy Pavlo · grabaciones públicas",
+        href: "https://15445.courses.cs.cmu.edu/",
+      },
+      {
+        kind: "guía",
+        title: "DuckDB · Friendly SQL",
+        subtitle: "Por qué dejamos sqlite en proyectos del club",
+        href: "https://duckdb.org/docs/",
+      },
+      {
+        kind: "guía",
+        title: "Modern data stack ELI5",
+        subtitle: "Por Iván Costa, en el blog del club",
+        href: "https://sigma-data-club.github.io/website/blog/",
+      },
+    ],
+  },
+  {
+    title: "mlops & producción",
+    items: [
+      {
+        kind: "libro",
+        title: "Designing Machine Learning Systems",
+        subtitle: "Chip Huyen",
+        href: "https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/",
+      },
+      {
+        kind: "guía",
+        title: "Made With ML · MLOps course",
+        subtitle: "Goku Mohandas · gratis",
+        href: "https://madewithml.com/",
+      },
+      {
+        kind: "guía",
+        title: "Setup interno del club: Prefect + DVC + MLflow",
+        subtitle: "Guía paso a paso · blog del club",
+        href: "https://sigma-data-club.github.io/website/blog/",
+      },
+    ],
+  },
+  {
+    title: "datasets abiertos (recomendados)",
+    items: [
+      {
+        kind: "dataset",
+        title: "Portal de datos abiertos del Ayuntamiento de València",
+        subtitle: "Ideal para proyectos urbanos",
+        href: "https://www.valencia.es/dadesobertes/",
+      },
+      {
+        kind: "dataset",
+        title: "RENFE Open Data",
+        subtitle: "Horarios, retrasos, cercanías",
+        href: "https://data.renfe.com/",
+      },
+      {
+        kind: "dataset",
+        title: "AEMET OpenData",
+        subtitle: "Meteorología nacional",
+        href: "https://opendata.aemet.es/",
+      },
+      {
+        kind: "dataset",
+        title: "Datos abiertos GVA",
+        subtitle: "Generalitat Valenciana",
+        href: "https://dadesobertes.gva.es/",
+      },
+    ],
+  },
+] as const;
+
 export const resources = {
   number: "05",
   label: "Recursos",
-  title: "Para seguir aprendiendo",
-  items: [
-    {
-      title: "Ruta de aprendizaje: de cero a Data Scientist",
-      meta: "Guía",
-      href: "#",
-    },
-    { title: "Datasets curados por la comunidad", meta: "Datos", href: "#" },
-    { title: "Plantillas de proyectos y notebooks", meta: "Toolkit", href: "#" },
-    { title: "Grabaciones de talleres pasados", meta: "Vídeo", href: "#" },
-    { title: "Bolsa de prácticas y empleo", meta: "Carrera", href: "#" },
-  ],
+  title: "Material curado por la comunidad.",
+  intro:
+    "Lo que el club recomienda — no lo que sale en SEO. Lista mantenida por la junta, revisada cada semestre. Si crees que falta algo, abre un PR en GitHub.",
+  categories: resourceCategories,
+  items: resourceCategories.flatMap((category) =>
+    category.items.map((item) => ({
+      title: item.title,
+      meta: item.kind,
+      href: item.href,
+    })),
+  ),
 };
 
 export const join = {
