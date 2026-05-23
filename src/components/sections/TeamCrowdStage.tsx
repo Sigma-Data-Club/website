@@ -16,9 +16,11 @@ function clamp01(n: number) {
  */
 export function TeamCrowdStage() {
   const trackRef = useRef<HTMLDivElement>(null);
-  const reducedMotion = prefersReducedMotion();
+  const [reducedMotion] = useState(prefersReducedMotion);
   const progressRef = useRef(reducedMotion ? 1 : 0);
-  const [placedCount, setPlacedCount] = useState(reducedMotion ? team.memberCount : 0);
+  const [placedCount, setPlacedCount] = useState(() =>
+    reducedMotion ? team.memberCount : 0,
+  );
 
   useEffect(() => {
     const track = trackRef.current;

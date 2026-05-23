@@ -25,7 +25,7 @@ export const nav = [
 export const hero = {
   eyebrow: "Club de Ciencia de Datos",
   // Cada palabra es una línea en pantalla grande.
-  headline: ["Aprende.", "Construye.", "Comparte."],
+  headline: ["Aprende", "Construye", "Comparte"],
   intro:
     "Sigma Data Club es la comunidad estudiantil donde exploramos datos, IA y machine learning con proyectos reales — y mucha gente curiosa.",
   primaryCta: { label: "Únete al club", href: "#unete" },
