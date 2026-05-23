@@ -5,7 +5,14 @@ import { useLayoutEffect, useMemo, useRef, useState, type RefObject } from "reac
 import * as THREE from "three";
 import { team } from "@/content/site";
 import { buildGridLayout, gridCameraDistance, type CrowdLayout } from "./clubCrowdGrid";
-import { ACCENT_HEX, INK_HEX, prefersReducedMotion } from "./glsl";
+import { ACCENT_HEX, BG_HEX, INK_HEX, prefersReducedMotion } from "./glsl";
+
+/** Dos tonos del club con luminosidad parecida (evita negros en sombra). */
+function crowdTones() {
+  const bright = new THREE.Color(ACCENT_HEX).lerp(new THREE.Color("#ffffff"), 0.1);
+  const soft = new THREE.Color(ACCENT_HEX).lerp(new THREE.Color(INK_HEX), 0.48);
+  return { bright, soft };
+}
 
 const N = team.memberCount;
 const DROP_HEIGHT = 2.8;
@@ -48,8 +55,7 @@ function ClubCrowd({
   const headRef = useRef<THREE.InstancedMesh>(null);
   const dummy = useMemo(() => new THREE.Object3D(), []);
   const hidden = useMemo(() => new THREE.Vector3(0, -999, 0), []);
-  const ink = useMemo(() => new THREE.Color(INK_HEX), []);
-  const accent = useMemo(() => new THREE.Color(ACCENT_HEX), []);
+  const tones = useMemo(() => crowdTones(), []);
   const color = useMemo(() => new THREE.Color(), []);
   const pointerWorld = useRef(new THREE.Vector2(99, 99));
   const smoothScroll = useRef(reduced ? 1 : 0);
@@ -112,10 +118,10 @@ function ClubCrowd({
       headMesh.setMatrixAt(i, dummy.matrix);
 
       const tint = allPlaced
-        ? THREE.MathUtils.clamp(ripple * 2.2 + wave * 4, 0, 1)
-        : THREE.MathUtils.clamp(placed * 0.4, 0, 1);
-      const base = layout.accent[i] > 0.5 ? accent : ink;
-      color.copy(base).lerp(accent, tint * (layout.accent[i] > 0.5 ? 0.35 : 0.85));
+        ? THREE.MathUtils.clamp(ripple * 1.4 + wave * 2.5, 0, 1)
+        : THREE.MathUtils.clamp(placed * 0.25, 0, 1);
+      const base = layout.accent[i] > 0.5 ? tones.bright : tones.soft;
+      color.copy(base).lerp(tones.bright, tint * 0.45);
       bodyMesh.setColorAt(i, color);
       headMesh.setColorAt(i, color);
     }
@@ -147,10 +153,10 @@ function ClubCrowd({
     write(clock.elapsedTime, smoothScroll.current);
   });
 
-  const mat = <meshStandardMaterial roughness={0.42} metalness={0.12} />;
+  const mat = <meshLambertMaterial />;
 
   return (
-    <group>
+    <group position={[0, -0.55, 0]}>
       <GridCamera layout={layout} />
       <instancedMesh ref={bodyRef} args={[undefined, undefined, N]} frustumCulled={false}>
         <capsuleGeometry args={[0.09, 0.2, 6, 10]} />
@@ -195,11 +201,13 @@ export function ClubCrowdScene({
       dpr={[1, 1.75]}
       frameloop={reduced ? "demand" : "always"}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-      style={{ background: "transparent" }}
+      style={{ background: "transparent", width: "100%", height: "100%", touchAction: "none" }}
     >
-      <ambientLight intensity={0.72} />
-      <directionalLight position={[5, 9, 6]} intensity={1.15} />
-      <directionalLight position={[-6, 5, -4]} intensity={0.4} color={ACCENT_HEX} />
+      <ambientLight intensity={1.1} />
+      <hemisphereLight args={["#dff5f5", BG_HEX, 0.95]} />
+      <directionalLight position={[4, 10, 6]} intensity={0.42} />
+      <directionalLight position={[-5, 7, 4]} intensity={0.28} color={ACCENT_HEX} />
+      <directionalLight position={[0, 5, -7]} intensity={0.22} />
       <ClubCrowdRoot reduced={reduced} scrollProgressRef={scrollProgressRef} />
     </Canvas>
   );

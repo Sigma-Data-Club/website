@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { team } from "@/content/site";
+import { SectionHeader } from "../SectionHeader";
 import { ClubCrowdCanvas } from "../three/ClubCrowdCanvas";
 import { prefersReducedMotion } from "../three/glsl";
 
@@ -54,29 +55,48 @@ export function TeamCrowdStage() {
 
   return (
     <div ref={trackRef} className="relative h-[200vh] md:h-[240vh]">
-      <div className="sticky top-0 z-0 flex min-h-[min(100svh,52rem)] flex-col justify-end overflow-hidden">
-        <div className="absolute inset-0" aria-hidden>
+      <div className="sticky top-0 z-0 min-h-svh overflow-hidden">
+        {/* Canvas a pantalla completa: recibe hover y pointer */}
+        <div className="absolute inset-0 z-0">
           <ClubCrowdCanvas scrollProgressRef={progressRef} />
-          <div className="absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-paper via-paper/90 to-transparent" />
         </div>
 
-        <div className="shell relative flex min-h-[44vh] flex-col justify-end pb-6 md:min-h-[52vh] md:pb-8">
-          <p className="kicker text-ink/55">{team.crowd.kicker}</p>
-          <p className="mt-2 max-w-lg text-lg leading-relaxed text-ink/75">
-            <span className="font-medium tabular-nums text-ink">{placedCount}</span>
-            <span className="text-ink/45"> / {team.memberCount}</span> {team.crowd.line}
-          </p>
-          <p className="display mt-4 text-[clamp(2.5rem,8vw,4.5rem)] leading-none! text-ink/90">
-            {placedCount > 0 ? placedCount : team.memberCount}
-            <span className="ml-2 text-[0.35em] font-sans font-medium tracking-wide text-accent">
-              miembros
-            </span>
-          </p>
-          {placedCount < team.memberCount ? (
-            <p className="mt-4 text-xs font-medium uppercase tracking-widest text-ink/40">
-              Sigue bajando para completar la cuadrícula
+        {/* Velos legibles: no interceptan el ratón */}
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 z-10 h-48 bg-linear-to-b from-paper via-paper/75 to-transparent md:h-56"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-24 bg-linear-to-t from-paper/80 to-transparent"
+          aria-hidden
+        />
+
+        {/* Título + métricas arriba (no tapa la cuadrícula ni el cursor) */}
+        <div className="shell pointer-events-none relative z-20 pt-6 md:pt-10">
+          <SectionHeader
+            number={team.number}
+            label={team.label}
+            title={team.title}
+          />
+
+          <div className="mt-8 max-w-xl md:mt-10">
+            <p className="kicker text-ink/55">{team.crowd.kicker}</p>
+            <p className="mt-2 text-lg leading-relaxed text-ink/75">
+              <span className="font-medium tabular-nums text-ink">{placedCount}</span>
+              <span className="text-ink/45"> / {team.memberCount}</span> {team.crowd.line}
             </p>
-          ) : null}
+            <p className="display mt-4 text-[clamp(2rem,6vw,3.75rem)] leading-none! text-ink/90">
+              {placedCount > 0 ? placedCount : team.memberCount}
+              <span className="ml-2 text-[0.35em] font-sans font-medium tracking-wide text-accent">
+                miembros
+              </span>
+            </p>
+            {placedCount < team.memberCount ? (
+              <p className="mt-3 text-xs font-medium uppercase tracking-widest text-ink/40">
+                Sigue bajando para completar la cuadrícula
+              </p>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>

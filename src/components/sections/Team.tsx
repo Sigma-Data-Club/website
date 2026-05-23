@@ -1,6 +1,5 @@
 import { team } from "@/content/site";
 import { Reveal } from "../Reveal";
-import { SectionHeader } from "../SectionHeader";
 import { TeamCrowdStage } from "./TeamCrowdStage";
 
 function initials(name: string) {
@@ -14,17 +13,11 @@ function initials(name: string) {
 
 export function Team() {
   return (
-    <section id="equipo" className="scroll-mt-24 bg-paper py-24 md:py-36">
-      <div className="shell">
-        <SectionHeader number={team.number} label={team.label} title={team.title} />
-      </div>
+    <section id="equipo" className="scroll-mt-24 bg-paper pb-24 md:pb-36">
+      <TeamCrowdStage />
 
-      <div className="mt-10 md:mt-12">
-        <TeamCrowdStage />
-      </div>
-
-      <div className="shell">
-        <p className="kicker mt-16 text-ink/50">Dirección del club</p>
+      <div className="shell pt-16 md:pt-20">
+        <p className="kicker text-ink/50">Dirección del club</p>
 
         <div className="mt-8 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
           {team.members.map((member, i) => (
