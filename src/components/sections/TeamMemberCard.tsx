@@ -24,7 +24,6 @@ export function TeamMemberCard({
   delay: number;
 }) {
   const [hovered, setHovered] = useState(false);
-  const num = String(index + 1).padStart(2, "0");
 
   const onEnter = useCallback(() => setHovered(true), []);
   const onLeave = useCallback(() => setHovered(false), []);
@@ -64,15 +63,7 @@ export function TeamMemberCard({
         <CardHoverParticles active={hovered} seed={index} />
 
         <div className="relative z-10 flex flex-1 flex-col">
-          <div className="flex items-start justify-between gap-3">
-            <span
-              className={`kicker text-[10px] transition-colors duration-300 ${
-                hovered ? "text-bg/45" : "text-ink/35"
-              }`}
-              aria-hidden
-            >
-              {num}
-            </span>
+          <div className="flex items-start justify-end">
             <span
               className={`relative text-[10px] font-semibold uppercase tracking-widest transition-colors duration-300 [text-shadow:0_0_14px_var(--color-bg),0_1px_2px_var(--color-bg)] group-hover:[text-shadow:0_0_14px_var(--color-ink),0_1px_2px_var(--color-ink)] ${
                 hovered ? "text-accent" : "text-ink/30"
