@@ -171,14 +171,82 @@ export const team = {
     kicker: "La comunidad",
     line: "personas aprendiendo, construyendo y compartiendo datos.",
   },
-  members: [
-    { name: "Nombre Apellido", role: "Presidencia" },
-    { name: "Nombre Apellido", role: "Vicepresidencia" },
-    { name: "Nombre Apellido", role: "Coord. de Talleres" },
-    { name: "Nombre Apellido", role: "Coord. de Proyectos" },
-    { name: "Nombre Apellido", role: "Comunicación" },
-    { name: "Nombre Apellido", role: "Alianzas" },
-  ],
+  board: {
+    title: "Junta directiva",
+    subtitle: "Curso 2025/26.",
+    page: "[ 01 / 02 ]",
+    members: [
+      {
+        name: "Imad Rifai",
+        role: "presidente",
+        image: "/sigma-characters-images/imad-r.png",
+        linkedin: "https://www.linkedin.com/in/imad-rifai",
+      },
+      {
+        name: "Sergio Ortiz",
+        role: "vicepresidente · coordinador",
+        linkedin: "https://www.linkedin.com/in/sergio-ortiz",
+      },
+      {
+        name: "Fernando Martínez",
+        role: "miembro junta",
+        linkedin: "https://www.linkedin.com/in/fernando-martinez",
+      },
+      {
+        name: "Pablo Gandía",
+        role: "miembro junta",
+        linkedin: "https://www.linkedin.com/in/pablo-gandia",
+      },
+      {
+        name: "Nouh Khouyi",
+        role: "miembro junta",
+        linkedin: "https://www.linkedin.com/in/nouh-khouyi",
+      },
+      {
+        name: "Carlota Gui",
+        role: "miembro junta",
+        linkedin: "https://www.linkedin.com/in/carlota-gui",
+      },
+      {
+        name: "Pablo Gil Martínez",
+        role: "miembro junta",
+        linkedin: "https://www.linkedin.com/in/pablo-gil-martinez",
+      },
+      {
+        name: "Adria Aguilar",
+        role: "miembro junta",
+        linkedin: "https://www.linkedin.com/in/adria-aguilar",
+      },
+    ],
+  },
+  mentors: {
+    title: "Mentores",
+    subtitle: "Alumni que echan una mano y que nos inspiran.",
+    page: "[ 02 / 02 ]",
+    members: [
+      {
+        name: "Laiqian Ji",
+        role: "alumni · founder · 2024",
+        bio: "Fundador de Sigma Data Club. Actualmente AI Developer.",
+        image: "/sigma-characters-images/laiqian-j.png",
+        linkedin: "https://www.linkedin.com/in/laiqian-ji",
+      },
+      {
+        name: "Andreu Bonet Pavía",
+        role: "alumni · cofundador · 2024",
+        bio: "Cofundador de Sigma Data Club.",
+        image: "/sigma-characters-images/andreu-b.png",
+        linkedin: "https://www.linkedin.com/in/andreu-bonet-pavia",
+      },
+      {
+        name: "Ernesto Martínez Gómez",
+        role: "alumni · cofundador · 2024",
+        bio: "Cofundador de Sigma Data Club. Actualmente CDO en Eaship; próximamente en Revolut.",
+        image: "/sigma-characters-images/ernesto-m.png",
+        linkedin: "https://www.linkedin.com/in/ernesto-martinez-gomez",
+      },
+    ],
+  },
 };
 
 export const resources = {

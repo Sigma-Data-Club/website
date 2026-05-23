@@ -7,7 +7,7 @@ import { team } from "@/content/site";
 import { ACCENT_HEX, INK_HEX, prefersReducedMotion } from "../glsl";
 
 const COLS = 3;
-const N = team.members.length;
+const N = team.board.members.length;
 const GAP = 1.55;
 
 function EquipoGrid({ reduced }: { reduced: boolean }) {
