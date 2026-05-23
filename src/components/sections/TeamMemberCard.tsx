@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useCallback, useState } from "react";
 import { CardHoverParticles } from "../CardHoverParticles";
 import { Reveal } from "../Reveal";
+import { asset } from "@/lib/basePath";
 
 type Member = {
   name: string;
@@ -50,7 +51,7 @@ export function TeamMemberCard({
               aria-hidden
             >
               <Image
-                src={member.image}
+                src={asset(member.image)}
                 alt=""
                 fill
                 sizes="(max-width: 768px) 160px, 200px"
