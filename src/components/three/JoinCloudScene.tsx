@@ -9,6 +9,8 @@ import { cloudFragmentShader, cloudVertexShader, sampleGlyph } from "./sigmaClou
 import { mulberry32 } from "./lab/random";
 
 const COUNT = 12000;
+/** Fracción de partículas en color acento (azul) frente a tinta (negro). */
+const ACCENT_RATIO = 0.58;
 
 /**
  * Variante de la nube para la sección "Únete": la σ se mantiene casi siempre
@@ -41,7 +43,7 @@ function Cloud({ reduced }: { reduced: boolean }) {
       aGlyph[i * 3 + 2] = (rand() - 0.5) * 0.5;
 
       aSize[i] = 1.0 + rand() * 1.2;
-      aAccent[i] = rand() < 0.07 ? 1.0 : 0.0;
+      aAccent[i] = rand() < ACCENT_RATIO ? 1.0 : 0.0;
     }
 
     const u = {
@@ -50,7 +52,7 @@ function Cloud({ reduced }: { reduced: boolean }) {
       uDpr: { value: Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, 2) },
       // Lejos al inicio (sin empuje) hasta que el cursor entre en escena.
       uPointer: { value: new THREE.Vector2(0, -999) },
-      uPointerStrength: { value: 2.6 }, // DEBUG: alto para confirmar
+      uPointerStrength: { value: 0.5 },
       uInk: { value: new THREE.Color(INK_HEX) },
       uAccent: { value: new THREE.Color(ACCENT_HEX) },
     };

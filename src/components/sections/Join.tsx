@@ -22,14 +22,14 @@ export function Join() {
 
         {/* Escenario: la σ del club emerge de los datos (respira casi formada).
             El título se superpone abajo, sobre el desvanecido, como en el hero. */}
-        <div className="relative mt-10 flex min-h-[48vh] items-end overflow-hidden md:mt-12">
+        <div className="relative mt-10 flex min-h-[48vh] items-end overflow-hidden pb-3 md:mt-12">
           <div className="pointer-events-none absolute inset-0" aria-hidden>
             <JoinCloudCanvas />
             {/* Solo difuminamos la base (para el título); el resto de la σ
                 queda limpia para que se reconozca el trazo superior. */}
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-bg via-bg/85 to-transparent" />
           </div>
-          <h2 className="display relative max-w-2xl text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9]">
+          <h2 className="display relative text-[clamp(2.5rem,7vw,5.5rem)] leading-none!">
             {join.title}
           </h2>
         </div>

@@ -58,10 +58,10 @@ export function Hero() {
           </a>
           <a
             href={hero.secondaryCta.href}
-            className="group inline-flex items-center justify-center gap-2 border border-ink px-7 py-4 text-base font-semibold text-ink transition-colors duration-300 hover:bg-ink hover:text-bg"
+            className="group inline-flex items-center justify-center gap-2 border border-ink bg-white px-7 py-4 text-base font-semibold text-ink transition-colors duration-300 hover:bg-ink hover:text-bg"
           >
             {hero.secondaryCta.label}
-            <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden>
+            <span className="transition-transform duration-300 group-hover:translate-y-1" aria-hidden>
               ↓
             </span>
           </a>
@@ -77,9 +77,6 @@ export function Hero() {
           <span className="scroll-hint">↓</span>
           Desliza para explorar
         </a>
-        <span className="kicker hidden text-ink/40 sm:block">
-          Est. {site.year} · {site.symbol}
-        </span>
       </div>
     </section>
   );

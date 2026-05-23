@@ -50,6 +50,7 @@ export const snoise = /* glsl */ `
 `;
 
 export const INK_HEX = "#0b0b0b";
+export const BG_HEX = "#ffffff";
 export const ACCENT_HEX = "#36b9ba";
 
 export function prefersReducedMotion() {
