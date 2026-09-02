@@ -7,7 +7,7 @@ type Member = {
   role: string;
   bio?: string;
   image?: string;
-  linkedin: string;
+  linkedin?: string;
 };
 
 function LeadershipBlock({
