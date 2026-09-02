@@ -10,7 +10,7 @@ export const site = {
   symbol: "σ",
   tagline: "Club de Ciencia de Datos",
   university: "Universidad", // ← pon aquí el nombre de tu universidad
-  email: "hola@sigmadataclub.org",
+  email: "sigmaclub.upv@gmail.com",
   year: 2026,
 };
 
@@ -472,8 +472,9 @@ export const join = {
   number: "06",
   label: "Únete",
   title: "¿Listo para empezar?",
-  body: "Da el primer paso. Déjanos tus datos y te invitamos al próximo evento — sin compromiso, sin requisitos previos.",
-  interests: ["Machine Learning", "Visualización", "NLP", "Data Engineering", "Aún no lo sé"],
+  body: "Da el primer paso. Rellena el formulario y te invitamos al próximo evento — sin compromiso, sin requisitos previos.",
+  formUrl:
+    "https://docs.google.com/forms/d/e/1FAIpQLSeCZaMDBU2KllVEIURvsVr-29RzjZlPPeAHKv-Vzr9rD-Tu_Q/viewform?usp=dialog",
 };
 
 export const socials = [
