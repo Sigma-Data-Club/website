@@ -478,8 +478,7 @@ export const join = {
 };
 
 export const socials = [
-  { label: "GitHub", href: "#" },
-  { label: "LinkedIn", href: "#" },
-  { label: "Instagram", href: "#" },
-  { label: "Discord", href: "#" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/sigma-data-club-upv/" },
+  { label: "Instagram", href: "https://www.instagram.com/sigma_dc_upv" },
+  { label: "TikTok", href: "https://www.tiktok.com/@sigma_dataclub" },
 ];
