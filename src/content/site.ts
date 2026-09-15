@@ -9,7 +9,7 @@ export const site = {
   shortName: "Sigma",
   symbol: "σ",
   tagline: "Club de Ciencia de Datos",
-  university: "Universidad", // ← pon aquí el nombre de tu universidad
+  university: "Universitat Politècnica de València",
   email: "sigmaclub.upv@gmail.com",
   year: 2026,
 };
