@@ -198,13 +198,15 @@ export const team = {
         name: "Cristina Catalá",
         role: "directora eventos",
         image: "/sigma-characters-images/cristina-catala.png",
-        linkedin: "https://www.linkedin.com/in/cristina-catal%C3%A1-saborit-a71748388",
+        linkedin:
+          "https://www.linkedin.com/in/cristina-catal%C3%A1-saborit-a71748388",
       },
       {
         name: "Aitana Oñate",
         role: "directora partnerships",
         image: "/sigma-characters-images/junta-retrato-03.png",
-        linkedin: "https://www.linkedin.com/in/aitana-o%C3%B1ate-jim%C3%A9nez-2385242b4",
+        linkedin:
+          "https://www.linkedin.com/in/aitana-o%C3%B1ate-jim%C3%A9nez-2385242b4",
       },
       {
         name: "Leire Sánchez",
@@ -273,7 +275,7 @@ export const team = {
       {
         name: "Ernesto Martínez Gómez",
         role: "alumni · cofundador · 2024",
-        bio: "Cofundador de Sigma Data Club. Actualmente CDO en Eaship.",
+        bio: "Cofundador de Sigma Data Club. Actualmente Data Analyst en Revolut.",
         image: "/sigma-characters-images/ernesto-m.png",
         linkedin: "https://www.linkedin.com/in/ernestomg",
       },
@@ -478,7 +480,10 @@ export const join = {
 };
 
 export const socials = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/sigma-data-club-upv/" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/sigma-data-club-upv/",
+  },
   { label: "Instagram", href: "https://www.instagram.com/sigma_dc_upv" },
   { label: "TikTok", href: "https://www.tiktok.com/@sigma_dataclub" },
 ];
