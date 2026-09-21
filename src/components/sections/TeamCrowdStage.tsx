@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { team } from "@/content/site";
 import { SectionHeader } from "../SectionHeader";
+import { useReducedMotion } from "../useReducedMotion";
 import { ClubCrowdCanvas } from "../three/ClubCrowdCanvas";
-import { prefersReducedMotion } from "../three/glsl";
 
 function clamp01(n: number) {
   return Math.min(1, Math.max(0, n));
@@ -12,9 +12,9 @@ function clamp01(n: number) {
 
 export function TeamCrowdStage() {
   const trackRef = useRef<HTMLDivElement>(null);
-  const [reducedMotion] = useState(prefersReducedMotion);
-  const progressRef = useRef(reducedMotion ? 1 : 0);
-  const [placedCount, setPlacedCount] = useState(reducedMotion ? team.memberCount : 0);
+  const reducedMotion = useReducedMotion();
+  const progressRef = useRef(0);
+  const [placedCount, setPlacedCount] = useState(0);
 
   useEffect(() => {
     const track = trackRef.current;
