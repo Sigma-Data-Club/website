@@ -4,8 +4,10 @@ import { mulberry32 } from "./lab/random";
 
 const SEED = 0x7e_71_70_6f;
 
-const GRADIENT_ACCENT = new THREE.Color(ACCENT_HEX);
-const GRADIENT_DARK = new THREE.Color(ACCENT_HEX).lerp(new THREE.Color(INK_HEX), 0.9);
+// Se construyen en cada llamada (no en tiempo de módulo) para que sigan al
+// tema activo: ACCENT_HEX/INK_HEX son live bindings que cambian con él.
+const gradientAccent = () => new THREE.Color(ACCENT_HEX);
+const gradientDark = () => new THREE.Color(ACCENT_HEX).lerp(new THREE.Color(INK_HEX), 0.9);
 
 export type CrowdLayout = {
   xz: Float32Array;
@@ -20,7 +22,7 @@ export type CrowdLayout = {
 };
 
 function colorOnCrowdGradient(t: number, out = new THREE.Color()) {
-  return out.copy(GRADIENT_ACCENT).lerp(GRADIENT_DARK, THREE.MathUtils.clamp(t, 0, 1));
+  return out.copy(gradientAccent()).lerp(gradientDark(), THREE.MathUtils.clamp(t, 0, 1));
 }
 
 function randomGradientStop(rand: () => number, col: number, row: number, cols: number, rows: number) {

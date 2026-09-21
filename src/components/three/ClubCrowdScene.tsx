@@ -5,7 +5,7 @@ import { useLayoutEffect, useMemo, useRef, useState, type RefObject } from "reac
 import * as THREE from "three";
 import { team } from "@/content/site";
 import { buildGridLayout, gridCameraDistance, type CrowdLayout } from "./clubCrowdGrid";
-import { ACCENT_HEX, BG_HEX, prefersReducedMotion } from "./glsl";
+import { ACCENT_HEX, BG_HEX, SKY_HEX, accentColor, prefersReducedMotion } from "./glsl";
 
 const N = team.memberCount;
 const DROP_HEIGHT = 2.8;
@@ -49,7 +49,7 @@ function ClubCrowd({
   const dummy = useMemo(() => new THREE.Object3D(), []);
   const hidden = useMemo(() => new THREE.Vector3(0, -999, 0), []);
   const color = useMemo(() => new THREE.Color(), []);
-  const highlight = useMemo(() => new THREE.Color(ACCENT_HEX), []);
+  const highlight = accentColor;
   const pointerWorld = useRef(new THREE.Vector2(99, 99));
   const smoothScroll = useRef(reduced ? 1 : 0);
   const { pointer, viewport } = useThree();
@@ -198,7 +198,7 @@ export function ClubCrowdScene({
       style={{ background: "transparent", width: "100%", height: "100%", touchAction: "pan-y" }}
     >
       <ambientLight intensity={1.1} />
-      <hemisphereLight args={["#dff5f5", BG_HEX, 0.95]} />
+      <hemisphereLight args={[SKY_HEX, BG_HEX, 0.95]} />
       <directionalLight position={[4, 10, 6]} intensity={0.42} />
       <directionalLight position={[-5, 7, 4]} intensity={0.28} color={ACCENT_HEX} />
       <directionalLight position={[0, 5, -7]} intensity={0.22} />

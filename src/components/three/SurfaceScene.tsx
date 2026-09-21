@@ -2,9 +2,8 @@
 
 import { Canvas, useFrame } from "@/components/three/fiber";
 import { useMemo, useRef, useState } from "react";
-import * as THREE from "three";
 import type { ShaderMaterial } from "three";
-import { ACCENT_HEX, INK_HEX, prefersReducedMotion, snoise } from "./glsl";
+import { accentColor, inkColor, prefersReducedMotion, snoise } from "./glsl";
 
 const vertexShader = /* glsl */ `
   uniform float uTime;
@@ -38,8 +37,8 @@ function Surface({ reduced }: { reduced: boolean }) {
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
-      uInk: { value: new THREE.Color(INK_HEX) },
-      uAccent: { value: new THREE.Color(ACCENT_HEX) },
+      uInk: { value: inkColor },
+      uAccent: { value: accentColor },
     }),
     [],
   );

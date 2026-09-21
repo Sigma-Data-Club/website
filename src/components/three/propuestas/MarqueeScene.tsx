@@ -4,7 +4,7 @@ import { Canvas, useFrame, useThree } from "@/components/three/fiber";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { marquee } from "@/content/site";
-import { ACCENT_HEX, INK_HEX, prefersReducedMotion } from "../glsl";
+import { accentColor, inkColor, prefersReducedMotion } from "../glsl";
 
 const N = marquee.length;
 const R = 3.2;
@@ -15,8 +15,8 @@ function OrbitRing({ reduced }: { reduced: boolean }) {
   const groupRef = useRef<THREE.Group>(null);
   const { pointer } = useThree();
   const dummy = useMemo(() => new THREE.Object3D(), []);
-  const ink = useMemo(() => new THREE.Color(INK_HEX), []);
-  const accent = useMemo(() => new THREE.Color(ACCENT_HEX), []);
+  const ink = inkColor;
+  const accent = accentColor;
   const color = useMemo(() => new THREE.Color(), []);
 
   useLayoutEffect(() => {

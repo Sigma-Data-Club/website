@@ -4,7 +4,7 @@ import { Canvas, useThree } from "@/components/three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import { ACCENT_HEX, INK_HEX, prefersReducedMotion } from "../glsl";
+import { ACCENT_HEX, INK_HEX, accentColor, inkColor, prefersReducedMotion } from "../glsl";
 import { mulberry32 } from "./random";
 import { labTopics } from "@/content/lab";
 
@@ -88,8 +88,8 @@ function Graph() {
 
   const dummy = useMemo(() => new THREE.Object3D(), []);
   const tmp = useMemo(() => new THREE.Color(), []);
-  const ink = useMemo(() => new THREE.Color(INK_HEX), []);
-  const accent = useMemo(() => new THREE.Color(ACCENT_HEX), []);
+  const ink = inkColor;
+  const accent = accentColor;
 
   // Escribe matrices y colores antes del primer pintado; se reejecuta al
   // cambiar el nodo bajo el cursor.

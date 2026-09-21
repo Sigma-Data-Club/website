@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { nav, site } from "@/content/site";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -55,22 +56,27 @@ export function Navbar() {
           ))}
         </ul>
 
-        {/* CTA (desktop) */}
-        <a
-          href="#unete"
-          className="hidden items-center gap-2 border border-ink bg-ink px-5 py-2.5 text-sm font-semibold text-bg transition-colors hover:bg-accent hover:border-accent md:inline-flex"
-        >
-          Únete
-          <span aria-hidden>→</span>
-        </a>
+        {/* Tema + CTA (desktop) */}
+        <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle />
+          <a
+            href="#unete"
+            className="inline-flex items-center gap-2 border border-ink bg-ink px-5 py-2.5 text-sm font-semibold text-bg transition-colors hover:bg-accent hover:border-accent"
+          >
+            Únete
+            <span aria-hidden>→</span>
+          </a>
+        </div>
 
-        {/* Botón menú (móvil) */}
+        {/* Tema + menú (móvil) */}
+        <div className="flex items-center gap-2 md:hidden">
+        <ThemeToggle />
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5"
         >
           <span
             className={`block h-0.5 w-6 bg-ink transition-transform duration-300 ${
@@ -88,6 +94,7 @@ export function Navbar() {
             }`}
           />
         </button>
+        </div>
       </nav>
 
       {/* Panel móvil */}

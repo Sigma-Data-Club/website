@@ -4,7 +4,7 @@ import { Canvas, useFrame, useThree } from "@/components/three/fiber";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { projects } from "@/content/site";
-import { ACCENT_HEX, INK_HEX, prefersReducedMotion } from "../glsl";
+import { accentColor, inkColor, prefersReducedMotion } from "../glsl";
 
 const COLS = 3;
 const N = projects.items.length;
@@ -13,8 +13,8 @@ const GAP = 1.45;
 function ProyectosMosaic({ reduced }: { reduced: boolean }) {
   const meshRef = useRef<THREE.InstancedMesh>(null);
   const dummy = useMemo(() => new THREE.Object3D(), []);
-  const ink = useMemo(() => new THREE.Color(INK_HEX), []);
-  const accent = useMemo(() => new THREE.Color(ACCENT_HEX), []);
+  const ink = inkColor;
+  const accent = accentColor;
   const color = useMemo(() => new THREE.Color(), []);
   const hover = useRef(-1);
   const { pointer } = useThree();

@@ -18,12 +18,48 @@
   --color-muted: #6f6f6a; /* texto secundario */
   --color-accent-soft: #e3f4f4; /* lavado del acento, muy puntual */
 
+  /* ----- Superficie invertida (pie, bloques de cierre) -----
+     En claro invierte de verdad; en oscuro se queda oscura para no
+     deslumbrar. Los botones siguen usando bg-ink/text-bg a propósito. */
+  --color-inverse: #0b0b0b;
+  --color-on-inverse: #ffffff;
+
+  /* Cielo del hemisphereLight de las escenas 3D. */
+  --color-sky: #dff5f5;
+
   /* ----- Tipografía ----- */
   --font-display: var(--font-display), "Space Grotesk", system-ui, sans-serif;
   --font-sans: var(--font-sans), "Inter", system-ui, sans-serif;
 
   /* ----- Radios (brutalismo = esquinas vivas) ----- */
   --radius-none: 0px;
+}
+
+/* ============================================================
+   Tema oscuro — mismos roles, otra materia
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg: #0b0b0c;
+  --color-ink: #f4f3ef;
+  --color-accent: #45cfd0; /* un punto más luminoso para aguantar sobre negro */
+
+  --color-paper: #141416;
+  --color-line: #26262a;
+  --color-line-strong: #f4f3ef;
+  --color-muted: #9a9a94;
+  --color-accent-soft: #10292b;
+
+  --color-inverse: #17171a;
+  --color-on-inverse: #f4f3ef;
+
+  --color-sky: #16383a;
 }
 
 /* ============================================================
@@ -166,6 +202,12 @@ h1, h2, h3, h4 {
   opacity: 0.035;
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Sobre fondo oscuro, multiply no pinta nada: se invierte el blend. */
+:root[data-theme="dark"] .grain {
+  mix-blend-mode: screen;
+  opacity: 0.028;
 }
 
 @media (prefers-reduced-motion: reduce) {

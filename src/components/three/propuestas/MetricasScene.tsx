@@ -4,7 +4,7 @@ import { Canvas, useFrame } from "@/components/three/fiber";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { about } from "@/content/site";
-import { ACCENT_HEX, INK_HEX, prefersReducedMotion } from "../glsl";
+import { INK_HEX, accentColor, inkColor, prefersReducedMotion } from "../glsl";
 
 const raw = about.stats.map((s) => parseFloat(s.value.replace(/\D/g, "")) || 1);
 const max = Math.max(...raw);
@@ -15,8 +15,8 @@ function Metricas({ reduced }: { reduced: boolean }) {
   const meshRef = useRef<THREE.InstancedMesh>(null);
   const wireRef = useRef<THREE.InstancedMesh>(null);
   const dummy = useMemo(() => new THREE.Object3D(), []);
-  const ink = useMemo(() => new THREE.Color(INK_HEX), []);
-  const accent = useMemo(() => new THREE.Color(ACCENT_HEX), []);
+  const ink = inkColor;
+  const accent = accentColor;
   const color = useMemo(() => new THREE.Color(), []);
   const phase = useRef(0);
 
