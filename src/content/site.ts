@@ -429,8 +429,7 @@ export const join = {
   label: "Únete",
   title: "¿Listo para empezar?",
   body: "Da el primer paso. Rellena el formulario y te invitamos al próximo evento — sin compromiso, sin requisitos previos.",
-  formUrl:
-    "https://docs.google.com/forms/d/e/1FAIpQLSeCZaMDBU2KllVEIURvsVr-29RzjZlPPeAHKv-Vzr9rD-Tu_Q/viewform?usp=dialog",
+  formUrl: "https://forms.gle/QbxKdakT8s9FW5cu7",
 };
 
 export const socials = [

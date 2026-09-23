@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
 const display = Space_Grotesk({
@@ -46,10 +48,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${display.variable} ${sans.variable}`}>
+    <html
+      lang="es"
+      className={`${display.variable} ${sans.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Pinta el tema antes del primer frame: sin destello blanco. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="min-h-screen antialiased">
-        {children}
-        <div className="grain" aria-hidden="true" />
+        <ThemeProvider>
+          {children}
+          <div className="grain" aria-hidden="true" />
+        </ThemeProvider>
       </body>
     </html>
   );

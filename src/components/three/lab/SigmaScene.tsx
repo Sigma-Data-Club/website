@@ -3,7 +3,7 @@
 import { Canvas, useFrame } from "@/components/three/fiber";
 import { useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import { ACCENT_HEX, INK_HEX, prefersReducedMotion } from "../glsl";
+import { accentColor, inkColor, prefersReducedMotion } from "../glsl";
 
 /**
  * Construye la Σ como un sólido editorial: dos barras horizontales y dos
@@ -89,8 +89,8 @@ const fragmentShader = /* glsl */ `
 
 function makeUniforms() {
   return {
-    uInk: { value: new THREE.Color(INK_HEX) },
-    uAccent: { value: new THREE.Color(ACCENT_HEX) },
+    uInk: { value: inkColor },
+    uAccent: { value: accentColor },
   };
 }
 

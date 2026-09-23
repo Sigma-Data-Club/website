@@ -55,7 +55,7 @@ export function ProjectCard({
   return (
     <Reveal delay={delay} className="h-full">
       <article
-        className="group flex h-full flex-col bg-bg transition-colors duration-300 hover:bg-ink hover:text-bg"
+        className="group flex h-full flex-col bg-bg transition-colors duration-300 hover:bg-inverse hover:text-on-inverse"
         style={
           hovered
             ? {
@@ -73,7 +73,7 @@ export function ProjectCard({
       >
       <div
         ref={visualRef}
-        className="relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-paper transition-colors duration-300 group-hover:bg-ink"
+        className="relative flex aspect-[16/10] items-center justify-center overflow-hidden bg-paper transition-colors duration-300 group-hover:bg-inverse"
       >
         {use3d ? (
           <div className="absolute inset-0" aria-hidden>
@@ -100,14 +100,14 @@ export function ProjectCard({
         <h3 className="display mt-4 line-clamp-2 min-h-[2.5lh] text-2xl leading-tight">
           {project.title}
         </h3>
-        <p className="mt-3 line-clamp-3 min-h-[3lh] flex-1 text-ink/65 transition-colors duration-300 group-hover:text-bg/70">
+        <p className="mt-3 line-clamp-3 min-h-[3lh] flex-1 text-ink/65 transition-colors duration-300 group-hover:text-on-inverse/70">
           {project.desc}
         </p>
         <ul className="mt-6 flex min-h-[1.75rem] flex-wrap content-start gap-2">
           {project.tags.map((tag) => (
             <li
               key={tag}
-              className="border border-ink/25 px-2.5 py-1 text-xs font-medium transition-colors duration-300 group-hover:border-bg/30"
+              className="border border-ink/25 px-2.5 py-1 text-xs font-medium transition-colors duration-300 group-hover:border-on-inverse/30"
             >
               {tag}
             </li>

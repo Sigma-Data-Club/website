@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useTheme } from "../ThemeProvider";
 import type { ProjectCardPointer } from "./ProjectCardScene";
 
 const ProjectCardScene = dynamic(
@@ -17,5 +18,9 @@ export function ProjectCardCanvas({
   pointer: ProjectCardPointer;
   hovered: boolean;
 }) {
-  return <ProjectCardScene index={index} pointer={pointer} hovered={hovered} />;
+  // Esta escena fija colores como prop de material/luz, así que se vuelve
+  // a montar al cambiar de tema para releer la paleta.
+  const { theme } = useTheme();
+
+  return <ProjectCardScene key={theme} index={index} pointer={pointer} hovered={hovered} />;
 }

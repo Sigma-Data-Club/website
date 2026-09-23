@@ -4,7 +4,7 @@ import { useFrame } from "@/components/three/fiber";
 import { useLayoutEffect, useMemo, useRef, type ReactElement } from "react";
 import * as THREE from "three";
 import type { ProjectVisualId } from "@/content/projectVisuals";
-import { ACCENT_HEX, INK_HEX, snoise } from "../glsl";
+import { INK_HEX, accentColor, inkColor, snoise } from "../glsl";
 import {
   createLineMaterial,
   pickStroke,
@@ -334,8 +334,8 @@ function ApertureGrid({ pointer, hovered, reduced }: VisualProps) {
       uHover: { value: 0 },
       uCardHover: { value: 0 },
       uPointer: { value: new THREE.Vector2(0.5, 0.5) },
-      uInk: { value: new THREE.Color(INK_HEX) },
-      uAccent: { value: new THREE.Color(ACCENT_HEX) },
+      uInk: { value: inkColor },
+      uAccent: { value: accentColor },
     }),
     [],
   );

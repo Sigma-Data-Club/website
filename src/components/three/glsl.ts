@@ -1,3 +1,5 @@
+import * as THREE from "three";
+
 /**
  * Ruido simplex 3D (Ashima Arts) reutilizable en los shaders de los heros.
  * Se concatena dentro de cada vertex/fragment shader que lo necesite.
@@ -49,9 +51,51 @@ export const snoise = /* glsl */ `
   }
 `;
 
-export const INK_HEX = "#0b0b0b";
-export const BG_HEX = "#ffffff";
-export const ACCENT_HEX = "#36b9ba";
+/* ------------------------------------------------------------------
+   Paleta de las escenas.
+
+   Son `let` a propósito: `syncSceneColors()` las reasigna cuando cambia
+   el tema y los imports de ESM son live bindings, así que quien lea el
+   hex en cada render (o en cada frame) ve el valor nuevo sin remontar.
+
+   Para los uniforms y los `color.copy(ink)` de los bucles de frame usa
+   los singletons de abajo: three lee el objeto en cada frame, de modo
+   que mutarlo in situ repinta sin re-render ni remonte.
+
+   Cuidado: `inkColor`/`accentColor`/`bgColor` son compartidos. Úsalos
+   siempre como ARGUMENTO (`target.copy(ink)`), nunca como receptor de
+   `.copy()`, `.lerp()` o `.set()`.
+   ------------------------------------------------------------------ */
+
+export let INK_HEX = "#0b0b0b";
+export let BG_HEX = "#ffffff";
+export let ACCENT_HEX = "#36b9ba";
+export let SKY_HEX = "#dff5f5";
+
+export const inkColor = new THREE.Color(INK_HEX);
+export const bgColor = new THREE.Color(BG_HEX);
+export const accentColor = new THREE.Color(ACCENT_HEX);
+
+/**
+ * Vuelca la paleta CSS del tema activo en la paleta de las escenas.
+ * La llama el ThemeProvider en cada cambio de tema (y en el arranque).
+ */
+export function syncSceneColors() {
+  if (typeof window === "undefined") return;
+
+  const css = getComputedStyle(document.documentElement);
+  const read = (name: string, fallback: string) =>
+    css.getPropertyValue(name).trim() || fallback;
+
+  INK_HEX = read("--color-ink", INK_HEX);
+  BG_HEX = read("--color-bg", BG_HEX);
+  ACCENT_HEX = read("--color-accent", ACCENT_HEX);
+  SKY_HEX = read("--color-sky", SKY_HEX);
+
+  inkColor.set(INK_HEX);
+  bgColor.set(BG_HEX);
+  accentColor.set(ACCENT_HEX);
+}
 
 export function prefersReducedMotion() {
   return (

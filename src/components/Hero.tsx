@@ -58,7 +58,7 @@ export function Hero() {
           </a>
           <a
             href={hero.secondaryCta.href}
-            className="group inline-flex items-center justify-center gap-2 border border-ink bg-white px-7 py-4 text-base font-semibold text-ink transition-colors duration-300 hover:bg-ink hover:text-bg"
+            className="group inline-flex items-center justify-center gap-2 border border-ink bg-bg px-7 py-4 text-base font-semibold text-ink transition-colors duration-300 hover:bg-inverse hover:text-on-inverse"
           >
             {hero.secondaryCta.label}
             <span className="transition-transform duration-300 group-hover:translate-y-1" aria-hidden>

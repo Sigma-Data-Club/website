@@ -4,7 +4,7 @@ import { Canvas, useFrame, useThree } from "@/components/three/fiber";
 import { useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import type { ShaderMaterial } from "three";
-import { ACCENT_HEX, INK_HEX, prefersReducedMotion } from "../glsl";
+import { accentColor, inkColor, prefersReducedMotion } from "../glsl";
 import {
   cloudFragmentShader,
   cloudVertexShader,
@@ -53,8 +53,8 @@ function Cloud({ reduced }: { reduced: boolean }) {
       uDpr: { value: Math.min(typeof window !== "undefined" ? window.devicePixelRatio : 1, 2) },
       uPointer: { value: new THREE.Vector2(0, 0) },
       uPointerStrength: { value: 1.0 },
-      uInk: { value: new THREE.Color(INK_HEX) },
-      uAccent: { value: new THREE.Color(ACCENT_HEX) },
+      uInk: { value: inkColor },
+      uAccent: { value: accentColor },
     };
 
     return { aScatter, aGlyph, aSize, aAccent, uniforms: u };

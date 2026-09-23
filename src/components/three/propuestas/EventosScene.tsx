@@ -4,7 +4,7 @@ import { Canvas, useFrame, useThree } from "@/components/three/fiber";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { events } from "@/content/site";
-import { ACCENT_HEX, INK_HEX, prefersReducedMotion } from "../glsl";
+import { INK_HEX, accentColor, inkColor, prefersReducedMotion } from "../glsl";
 
 const N = events.items.length;
 const SPINE_LEN = 7;
@@ -29,8 +29,8 @@ function Timeline({ reduced }: { reduced: boolean }) {
     return new THREE.Line(geo, mat);
   }, []);
   const dummy = useMemo(() => new THREE.Object3D(), []);
-  const ink = useMemo(() => new THREE.Color(INK_HEX), []);
-  const accent = useMemo(() => new THREE.Color(ACCENT_HEX), []);
+  const ink = inkColor;
+  const accent = accentColor;
   const color = useMemo(() => new THREE.Color(), []);
   const active = useRef(0);
   const { pointer } = useThree();

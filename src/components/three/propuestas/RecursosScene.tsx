@@ -6,7 +6,7 @@ import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { resources } from "@/content/site";
 import { site } from "@/content/site";
-import { ACCENT_HEX, INK_HEX, prefersReducedMotion } from "../glsl";
+import { ACCENT_HEX, INK_HEX, accentColor, inkColor, prefersReducedMotion } from "../glsl";
 
 const N = resources.items.length;
 const R = 3.1;
@@ -31,8 +31,8 @@ function Hub({ reduced }: { reduced: boolean }) {
     );
   }, []);
   const dummy = useMemo(() => new THREE.Object3D(), []);
-  const ink = useMemo(() => new THREE.Color(INK_HEX), []);
-  const accent = useMemo(() => new THREE.Color(ACCENT_HEX), []);
+  const ink = inkColor;
+  const accent = accentColor;
   const color = useMemo(() => new THREE.Color(), []);
   const [active, setActive] = useState(0);
   const { pointer } = useThree();

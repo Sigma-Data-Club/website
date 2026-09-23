@@ -4,7 +4,7 @@ import { Canvas, useFrame } from "@/components/three/fiber";
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import type { ShaderMaterial } from "three";
-import { ACCENT_HEX, INK_HEX, prefersReducedMotion } from "./glsl";
+import { accentColor, inkColor, prefersReducedMotion } from "./glsl";
 import { cloudFragmentShader, cloudVertexShader, sampleGlyph } from "./sigmaCloud";
 import { mulberry32 } from "./lab/random";
 
@@ -53,8 +53,8 @@ function Cloud({ reduced }: { reduced: boolean }) {
       // Lejos al inicio (sin empuje) hasta que el cursor entre en escena.
       uPointer: { value: new THREE.Vector2(0, -999) },
       uPointerStrength: { value: 0.5 },
-      uInk: { value: new THREE.Color(INK_HEX) },
-      uAccent: { value: new THREE.Color(ACCENT_HEX) },
+      uInk: { value: inkColor },
+      uAccent: { value: accentColor },
     };
 
     return { aScatter, aGlyph, aSize, aAccent, uniforms: u };

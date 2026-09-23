@@ -31,7 +31,7 @@ export function TeamMemberCard({
   return (
     <Reveal delay={delay} className="h-full">
       <article
-        className="group relative flex h-full min-h-38 flex-col overflow-hidden bg-bg p-4 transition-colors duration-300 hover:bg-ink hover:text-bg md:min-h-40 md:p-5"
+        className="group relative flex h-full min-h-38 flex-col overflow-hidden bg-bg p-4 transition-colors duration-300 hover:bg-inverse hover:text-on-inverse md:min-h-40 md:p-5"
         onMouseEnter={onEnter}
         onMouseLeave={onLeave}
       >
@@ -48,7 +48,7 @@ export function TeamMemberCard({
         {member.image ? (
           <>
             <div
-              className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-bg from-30% via-bg/95 via-50% to-transparent to-[68%] transition-[background] duration-300 group-hover:from-ink group-hover:via-ink/95"
+              className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-bg from-30% via-bg/95 via-50% to-transparent to-[68%] transition-[background] duration-300 group-hover:from-inverse group-hover:via-inverse/95"
               aria-hidden
             />
             <div
@@ -83,11 +83,11 @@ export function TeamMemberCard({
 
           <div className={member.image ? "max-w-[72%]" : undefined}>
             <h3 className="display mt-3 text-lg leading-tight md:text-xl">{member.name}</h3>
-            <p className="mt-1 text-xs font-medium uppercase tracking-wide text-accent transition-colors duration-300 group-hover:text-bg/80">
+            <p className="mt-1 text-xs font-medium uppercase tracking-wide text-accent transition-colors duration-300 group-hover:text-on-inverse/80">
               {member.role}
             </p>
             {member.bio ? (
-              <p className="mt-2 text-sm leading-relaxed text-ink/65 transition-colors duration-300 group-hover:text-bg/70">
+              <p className="mt-2 text-sm leading-relaxed text-ink/65 transition-colors duration-300 group-hover:text-on-inverse/70">
                 {member.bio}
               </p>
             ) : null}

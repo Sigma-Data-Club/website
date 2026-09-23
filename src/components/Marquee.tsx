@@ -10,7 +10,7 @@ export function Marquee() {
   const items = [...marquee, ...marquee];
 
   return (
-    <div className="border-y border-ink bg-ink py-4 text-bg overflow-hidden">
+    <div className="border-y border-ink bg-inverse py-4 text-on-inverse overflow-hidden">
       <div className="marquee">
         {items.map((word, i) => (
           <span

@@ -3,7 +3,7 @@
 import { Canvas, useFrame, useThree } from "@/components/three/fiber";
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
-import { ACCENT_HEX, INK_HEX, prefersReducedMotion } from "../glsl";
+import { ACCENT_HEX, accentColor, inkColor, prefersReducedMotion } from "../glsl";
 
 const GRID = 50; // 50 x 50 = 2.500 columnas
 const SPACING = 0.34;
@@ -29,8 +29,8 @@ function Field({ reduced }: { reduced: boolean }) {
 
   const dummy = useMemo(() => new THREE.Object3D(), []);
   const color = useMemo(() => new THREE.Color(), []);
-  const ink = useMemo(() => new THREE.Color(INK_HEX), []);
-  const accent = useMemo(() => new THREE.Color(ACCENT_HEX), []);
+  const ink = inkColor;
+  const accent = accentColor;
   const pointer = useRef(new THREE.Vector2(99, 99)); // fuera del campo al inicio
 
   // Coordenadas (x, z) de cada columna, precalculadas.

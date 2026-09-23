@@ -3,7 +3,7 @@
 import { useFrame, useThree } from "@/components/three/fiber";
 import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { ACCENT_HEX, INK_HEX } from "../glsl";
+import { ACCENT_HEX, INK_HEX, accentColor, inkColor } from "../glsl";
 import type { ProjectCardPointer } from "../ProjectCardScene";
 
 export type VisualProps = {
@@ -17,8 +17,8 @@ export type CardMaterialOpts = {
   opacity?: number;
 };
 
-export const ink = () => new THREE.Color(INK_HEX);
-export const accent = () => new THREE.Color(ACCENT_HEX);
+export const ink = () => inkColor;
+export const accent = () => accentColor;
 
 /** Negro en reposo; acento (azul Sigma) cuando la card hace hover. */
 export function pickStroke(target: THREE.Color, cardHovered: boolean, focused = false) {
